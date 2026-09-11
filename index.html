@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl" class="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>تحدي الـ 30 يوم | Vercel Cloud Tracker</title>
   
   <!-- Tailwind CSS CDN -->
@@ -104,13 +104,6 @@
       border-color: #cbd5e1 !important;
       color: #0f172a !important;
     }
-    html.light .task-item-card {
-      background-color: #f8fafc !important;
-      border-color: #e2e8f0 !important;
-    }
-    html.light .task-item-text {
-      color: #0f172a !important;
-    }
     html.light input, html.light textarea, html.light select {
       background-color: #ffffff !important;
       color: #0f172a !important;
@@ -167,11 +160,11 @@
               <span id="role-display-text">المالك</span>
             </span>
           </div>
-          <p class="text-[10px] text-slate-400 hidden sm:block theme-text-muted truncate">الأوماد + صيدليات العقبي + مسار المبيعات</p>
+          <p class="text-[10px] text-slate-400 hidden sm:block theme-text-muted truncate">الروتين الشامل • العقبي • الأوماد • المبيعات • الإنجليزي</p>
         </div>
       </div>
 
-      <!-- Quick Action Buttons & Switchers (Compact on mobile) -->
+      <!-- Quick Action Buttons & Switchers -->
       <div class="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
 
         <!-- Cloud Database Status Pill (Desktop only) -->
@@ -207,7 +200,7 @@
           <span id="theme-icon-display" class="text-xs">🌙</span>
         </button>
 
-        <!-- Share Button (Desktop only, available in Settings on mobile) -->
+        <!-- Share Button (Desktop only) -->
         <button onclick="openShareModal()" title="مشاركة الرابط" class="hidden sm:flex px-2.5 py-1.5 rounded-xl bg-indigo-600/20 border border-indigo-500/40 hover:bg-indigo-600/30 transition text-indigo-300 hover:text-white items-center gap-1 text-xs font-bold">
           <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
           <span>مشاركة</span>
@@ -226,7 +219,7 @@
   <!-- Main Container -->
   <main class="max-w-7xl mx-auto w-full px-3 sm:px-6 py-3 sm:py-6 flex-1 flex flex-col gap-4 overflow-x-hidden">
 
-    <!-- Navigation Tabs (Hidden on mobile to prevent duplicate navigation and clutter) -->
+    <!-- Navigation Tabs (Desktop only) -->
     <div class="hidden md:flex items-center justify-between flex-wrap gap-3 pb-1 border-b border-slate-800">
       <div class="inline-flex p-1 bg-slate-900/90 border border-slate-800/80 rounded-2xl theme-card-subtle">
         
@@ -252,11 +245,11 @@
 
         <button onclick="switchTab('analytics')" id="tab-btn-analytics" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200 theme-text-muted">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-          <span>المبيعات والتحليلات</span>
+          <span>المتابعة الشاملة والرصد</span>
         </button>
       </div>
 
-      <!-- Quick Action Buttons -->
+      <!-- Export Backup Button -->
       <div class="flex items-center gap-2 text-xs">
         <button onclick="exportBackupData()" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-slate-200 transition flex items-center gap-1.5 theme-card-subtle">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
@@ -364,10 +357,10 @@
                   <span>إضافة صورة لليوم</span>
                   <input type="file" id="daily-photo-input" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)">
                 </label>
-                <span class="text-[10px] text-slate-500">يتم ضغط الصورة وحفظها سحابياً لحسابك فوراً</span>
+                <span class="text-[10px] text-slate-500">حفظ سحابي فوري وإمكانية الحذف بنقرة واحدة</span>
               </div>
 
-              <!-- Current Day Photo Thumbnails -->
+              <!-- Current Day Photo Thumbnails With Direct Delete Action -->
               <div id="daily-photos-gallery" class="grid grid-cols-3 sm:grid-cols-4 gap-2.5 mt-3">
                 <!-- Injected via JS -->
               </div>
@@ -390,7 +383,7 @@
           </div>
         </div>
 
-        <!-- Right Column: Timeline Schedule (SECONDARY ON MOBILE) -->
+        <!-- Right Column: Timeline Schedule (VERTICAL FLOW: Time -> Title -> Description) -->
         <div class="lg:col-span-5 space-y-4 order-2 lg:order-1">
           <div class="glass-card rounded-2xl p-4 sm:p-5 border border-slate-800">
             <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
@@ -446,10 +439,10 @@
       </div>
     </div>
 
-    <!-- VIEW 3: WEIGHT TRACKER & CHART (FULLY DYNAMIC & MANUAL) -->
+    <!-- VIEW 3: WEIGHT TRACKER & CHART -->
     <div id="view-weight" class="tab-view hidden space-y-6">
       
-      <!-- Top Metrics Cards: completely customizable -->
+      <!-- Top Metrics Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
         <div class="glass-card rounded-2xl p-4 border border-slate-800">
@@ -546,7 +539,7 @@
 
     </div>
 
-    <!-- VIEW 4: ALL PHOTOS GALLERY -->
+    <!-- VIEW 4: ALL PHOTOS GALLERY (WITH INSTANT DELETE) -->
     <div id="view-photos" class="tab-view hidden space-y-6">
       <div class="glass-card rounded-2xl p-5 border border-slate-800">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800">
@@ -555,7 +548,7 @@
               <span>معرض صور التوثيق الشامل</span>
               <span id="all-photos-badge" class="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">0 صور مرفوعة</span>
             </h2>
-            <p class="text-xs text-slate-400 theme-text-muted mt-1">تصفح جميع صور الوجبات، الميزان، والتمرين المرفوعة خلال الـ 30 يوماً</p>
+            <p class="text-xs text-slate-400 theme-text-muted mt-1">تصفح صور الوجبات والميزان والتمرين مع إمكانية الحذف المباشر بنقرة واحدة</p>
           </div>
 
           <!-- Filter by day -->
@@ -574,62 +567,66 @@
       </div>
     </div>
 
-    <!-- VIEW 5: ANALYTICS & SKILLS ROADMAP -->
+    <!-- VIEW 5: COMPREHENSIVE 6-PILLAR TRACKER & SMART INSIGHTS HUB -->
     <div id="view-analytics" class="tab-view hidden space-y-6">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        
-        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-3">
-          <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold">📈</div>
+      
+      <!-- Top Overall Score & Pulse Banner -->
+      <div class="glass-card rounded-2xl p-5 border border-indigo-500/30 flex flex-col md:flex-row items-center justify-between gap-4 bg-gradient-to-r from-indigo-950/40 via-slate-900/60 to-emerald-950/30">
+        <div class="flex items-center gap-3 w-full md:w-auto">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-2xl font-black shadow-inner flex-shrink-0">
+            🎯
+          </div>
           <div>
-            <div class="text-xs text-slate-400 theme-text-muted">مسار مهارة المبيعات</div>
-            <div id="sales-progress-label" class="text-lg font-black text-white theme-text-primary">0 من 14 خطوة</div>
-          </div>
-          <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
-            <div id="sales-progress-bar" class="bg-indigo-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
-          </div>
-          <p class="text-xs text-slate-400 theme-text-muted leading-relaxed">
-            الخدمة: <strong>AI Automation مفصلة لمدربي اللياقة (Fitness Coaches)</strong> لمضاعفة مبيعاتهم وتوفير وقتهم.
-          </p>
-        </div>
-
-        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-3">
-          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">🎥</div>
-          <div>
-            <div class="text-xs text-slate-400 theme-text-muted">صيدليات العقبي (Media Buyer)</div>
-            <div id="media-buyer-videos-count" class="text-lg font-black text-white theme-text-primary">0 فيديو</div>
-          </div>
-          <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
-            <div id="media-progress-bar" class="bg-emerald-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
-          </div>
-          <p class="text-xs text-slate-400 theme-text-muted leading-relaxed">
-            إنتاج الفيديوهات واختبار نصوص وزوايا إعلانية ورسائل جديدة يومياً.
-          </p>
-        </div>
-
-        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">☕</div>
-          <div>
-            <div class="text-xs text-slate-400 theme-text-muted">تدرج سكر الشاي</div>
-            <div id="sugar-current-milestone" class="text-lg font-black text-amber-400">1.25 ملعقة</div>
-          </div>
-          <div class="grid grid-cols-4 gap-1 text-[10px] text-center font-semibold pt-1">
-            <div class="p-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">أسبوع 1<br>1.25 م</div>
-            <div class="p-1 rounded bg-slate-900 text-slate-400 border border-slate-800 theme-card-subtle">أسبوع 2<br>1.0 م</div>
-            <div class="p-1 rounded bg-slate-900 text-slate-400 border border-slate-800 theme-card-subtle">أسبوع 3<br>0.75 م</div>
-            <div class="p-1 rounded bg-slate-900 text-slate-400 border border-slate-800 theme-card-subtle">أسبوع 4<br>0.5 م</div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-base sm:text-lg font-black text-white theme-text-primary">لوحة الرصد والتحليلات الشاملة</h2>
+              <span id="tracker-overall-badge" class="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">0% التزام عام</span>
+            </div>
+            <p class="text-xs text-slate-400 theme-text-muted mt-0.5">متابعة دقيقة لأركان التحدي الـ 6 مع تقييمات رقمية وتشخيص يومي فوري</p>
           </div>
         </div>
 
+        <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end border-t md:border-t-0 pt-3 md:pt-0 border-slate-800">
+          <div class="text-right">
+            <div class="text-[10px] text-slate-400 theme-text-muted">مؤشر الانضباط</div>
+            <div id="overall-score-grade" class="text-sm font-extrabold text-emerald-400">ممتاز 🟢</div>
+          </div>
+          <div class="w-24 bg-slate-800 h-3 rounded-full overflow-hidden">
+            <div id="overall-score-bar" class="bg-gradient-to-r from-indigo-500 to-emerald-400 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
       </div>
 
-      <!-- Curriculum List -->
+      <!-- Smart Insights & Diagnostic Feedback Card -->
+      <div class="glass-card rounded-2xl p-4 sm:p-5 border border-slate-800 space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-sm text-amber-300 flex items-center gap-2">
+            <span>💡 التشخيص الذكي والرؤى اليومية (Smart Insights):</span>
+          </h3>
+          <span class="text-[10px] text-slate-400 font-mono">تحديث لحظي</span>
+        </div>
+        <div id="insights-diagnostic-container" class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs leading-relaxed">
+          <!-- Dynamic actionable diagnostic text injected via JS -->
+        </div>
+      </div>
+
+      <!-- 6 Pillars Comprehensive Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="six-pillars-grid">
+        <!-- Injected dynamically via JS: English, OMAD, Workout, Elokaby, Sales, Sugar -->
+      </div>
+
+      <!-- Sales & AI Automation Curriculum Reference Section -->
       <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-4">
-        <h3 class="font-bold text-sm text-white theme-text-primary flex items-center gap-2">
-          <span>خارطة طريق كورس وتطبيق المبيعات (AI Automation for Coaches)</span>
-        </h3>
-        <p class="text-xs text-slate-400 theme-text-muted">
-          النظام مقسم بنظام التبادل: يوم دراسة محاضرة واستيعابها، ويوم تطبيق فوري وبناء أصول الخدمة.
-        </p>
+        <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+          <div>
+            <h3 class="font-bold text-sm text-white theme-text-primary flex items-center gap-2">
+              <span>خارطة طريق كورس وتطبيق المبيعات (AI Automation for Coaches)</span>
+            </h3>
+            <p class="text-xs text-slate-400 theme-text-muted mt-0.5">
+              14 محاضرة دراسية و 14 خطوة تطبيق عملية لبناء أصول خدمة أتمتة مدربي اللياقة
+            </p>
+          </div>
+          <span id="curriculum-status-pill" class="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">0/14 مكتملة</span>
+        </div>
 
         <div id="sales-curriculum-list" class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
           <!-- Injected via JS -->
@@ -771,17 +768,24 @@
     </div>
   </div>
 
-  <!-- MODAL: IMAGE PREVIEW LIGHTBOX -->
+  <!-- MODAL: IMAGE PREVIEW LIGHTBOX (WITH DELETE BUTTON) -->
   <div id="image-preview-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="closeImagePreview()">
     <div class="relative max-w-3xl w-full max-h-[90vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
       <button onclick="closeImagePreview()" class="absolute -top-10 left-0 p-2 rounded-full bg-slate-800 text-white hover:bg-slate-700">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
-      <img id="preview-modal-img" src="" alt="معاينة الصورة" class="max-h-[80vh] w-auto rounded-2xl object-contain shadow-2xl border border-slate-700">
-      <div id="preview-modal-caption" class="text-xs text-slate-300 mt-3 text-center"></div>
-      <button id="preview-delete-btn" class="mt-2 text-xs text-red-400 hover:text-red-300 underline font-semibold">
-        حذف هذه الصورة
-      </button>
+      <img id="preview-modal-img" src="" alt="معاينة الصورة" class="max-h-[75vh] w-auto rounded-2xl object-contain shadow-2xl border border-slate-700">
+      <div id="preview-modal-caption" class="text-xs text-slate-300 mt-3 text-center font-semibold"></div>
+      
+      <div class="flex items-center gap-3 mt-3">
+        <button id="preview-delete-btn" class="px-4 py-1.5 rounded-xl bg-red-600/80 hover:bg-red-600 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-lg shadow-red-600/20 active:scale-95">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+          <span>حذف هذه الصورة</span>
+        </button>
+        <button onclick="closeImagePreview()" class="px-4 py-1.5 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold hover:text-white">
+          إغلاق
+        </button>
+      </div>
     </div>
   </div>
 
@@ -908,7 +912,7 @@
     </button>
     <button onclick="switchTab('analytics')" id="mob-nav-analytics" class="flex flex-col items-center gap-0.5 text-[10px] font-medium text-slate-400 hover:text-white py-1 px-2.5 transition active:scale-95">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-      <span>المبيعات</span>
+      <span>المتابعة</span>
     </button>
   </nav>
 
@@ -921,13 +925,12 @@
     import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     /* ==========================================================
-       30-DAY MASTER CHALLENGE APPLICATION ENGINE
+       30-DAY MASTER CHALLENGE ENGINE & COMPREHENSIVE TRACKER
        ========================================================== */
 
     const TRACKER_PARAM_KEY = "t";
     const DAYS_OF_WEEK = ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"];
 
-    // Default configuration blueprint: completely manual weights
     const defaultState = {
       activeDayIndex: 1,
       startDate: "2026-09-12",
@@ -936,15 +939,15 @@
         editorPin: "5678",
       },
       weightSettings: {
-        startWeight: null, // manual
-        targetWeight: null, // manual
+        startWeight: null, // Fully manual
+        targetWeight: null, // Fully manual
       },
-      weightLogs: [], // zero hardcoded logs
+      weightLogs: [],
       days: []
     };
 
     let appState = JSON.parse(JSON.stringify(defaultState));
-    let currentUserRole = "owner"; // 'owner' | 'editor' | 'viewer'
+    let currentUserRole = "owner";
     let currentTheme = localStorage.getItem('challenge_theme') || "dark";
     let activeTrackerId = "master-challenge-2026";
     let weightChartInstance = null;
@@ -962,7 +965,7 @@
         const parts = startDateStr.split("-");
         baseDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
       } else {
-        baseDate = new Date(2026, 8, 12); // Sept 12, 2026 (Saturday)
+        baseDate = new Date(2026, 8, 12);
       }
 
       for (let i = 1; i <= 30; i++) {
@@ -971,12 +974,10 @@
         const monthNum = currentDate.getMonth() + 1;
         const dateFormatted = `${dayOfMonth}/${monthNum}`;
 
-        const rawDayOfWeek = currentDate.getDay(); // 0 = Sunday, 6 = Saturday
-        // Map to Arabic standard: 6=السبت, 0=الأحد, 1=الإثنين, 2=الثلاثاء, 3=الأربعاء, 4=الخميس, 5=الجمعة
+        const rawDayOfWeek = currentDate.getDay();
         const arDayIndex = (rawDayOfWeek + 1) % 7;
         const dayName = DAYS_OF_WEEK[arDayIndex];
 
-        // Classification
         const isWorkoutDay = (dayName === "الأحد" || dayName === "الثلاثاء" || dayName === "الخميس");
         const isFriday = (dayName === "الجمعة");
         const isRestDay = (!isWorkoutDay && !isFriday);
@@ -987,7 +988,6 @@
         if (weekNumber === 3) sugarAllowance = "0.75 ملعقة";
         if (weekNumber >= 4) sugarAllowance = "0.5 ملعقة";
 
-        // Sales curriculum alternating plan
         let salesTask = "";
         const lectureNum = Math.ceil(i / 2);
         if (i <= 28) {
@@ -1112,7 +1112,6 @@
       try {
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'challenge-30day-tracker';
         
-        // Exact user Firebase credentials
         const firebaseConfig = {
           apiKey: "AIzaSyDE2laD3c4-e2THQYxMZ3OkugbhCj0j56U",
           authDomain: "challenge-tracker-2026.firebaseapp.com",
@@ -1126,7 +1125,6 @@
         const trackerFromUrl = urlParams.get(TRACKER_PARAM_KEY);
         const roleFromUrl = urlParams.get('role');
 
-        // Persistent role logic: if URL doesn't specify viewer, check localStorage or default to Owner!
         const savedRole = localStorage.getItem('challenge_user_role');
         if (roleFromUrl && ['owner', 'editor', 'viewer'].includes(roleFromUrl)) {
           currentUserRole = roleFromUrl;
@@ -1170,7 +1168,6 @@
           if (snap.exists()) {
             const remoteData = snap.data();
             if (remoteData && remoteData.days && remoteData.days.length === 30) {
-              // Ensure English task exists in saved data for seamless migration
               remoteData.days.forEach((d) => {
                 if (d.tasks && !d.tasks.some(t => t.category === "english")) {
                   const salesIdx = d.tasks.findIndex(t => t.category === "sales");
@@ -1194,6 +1191,7 @@
               updateGlobalCounters();
               initWeightTracker();
               renderGlobalPhotosGallery();
+              renderAnalyticsView();
               updateSyncIndicator(true, "متصل - متزامن لحظياً");
             }
           } else {
@@ -1433,7 +1431,7 @@
           { time: "08:45 م - 09:30 م", title: "التمرين المنزلي (45 دقيقة)", desc: "تمارين وزن الجسم والدمبل بشدة عالية", color: "text-amber-300 font-bold" },
           { time: "09:30 م - 10:00 م", title: "الاستحمام والانتعاش", desc: "راحة وإعداد الوجبة", color: "text-slate-300" },
           { time: "10:00 م", title: "وجبة الأوماد الرئيسية", desc: "سلطة أولاً -> بروتين -> قليل كارب (≤ 1000 سعرة)", color: "text-emerald-400 font-bold" },
-          { time: "12:00 ص - 05:00 ف", title: "العمل وممارسة الإنجليزية", desc: "30 دقيقة Gemini Live Chat + كورس نادر وشاي بالسكر المحدد", color: "text-indigo-300" },
+          { time: "12:00 ص - 05:00 ف", title: "العمل وممارسة الإنجليزية", desc: "30 دقيقة Gemini Live Chat + كورس نادر وشاي بالسكر المحدد", color: "text-indigo-300 font-semibold" },
           { time: "05:00 فجراً", title: "النوم", desc: "راحة تامة لمدة 6.5 ساعة", color: "text-slate-400" }
         ];
       } else if (day.isFriday) {
@@ -1447,7 +1445,7 @@
           { time: "05:00 م - 08:30 م", title: "كورس وتطبيق المبيعات", desc: "دراسة وتطبيق منظومة الأتمتة للكوتشز", color: "text-indigo-400 font-bold" },
           { time: "08:30 م - 10:00 م", title: "وقت راحة واستجمام", desc: "لا يوجد تمرين ولا كسر صيام", color: "text-slate-400" },
           { time: "10:00 م - 11:00 م", title: "الوجبة الثانية الكبيرة", desc: "حوالي 1000 سعرة لتنشيط الحرق ومنع الثبات", color: "text-emerald-400 font-bold" },
-          { time: "12:00 ص - 05:00 ف", title: "العمل وممارسة الإنجليزية", desc: "30 دقيقة Gemini Live Chat + كورس نادر وشاي بنصف ملعقة", color: "text-indigo-300" },
+          { time: "12:00 ص - 05:00 ف", title: "العمل وممارسة الإنجليزية", desc: "30 دقيقة Gemini Live Chat + كورس نادر وشاي بنصف ملعقة", color: "text-indigo-300 font-semibold" },
           { time: "05:00 فجراً", title: "النوم", desc: "نوم مريح استعداداً للأسبوع القادم", color: "text-slate-400" }
         ];
       } else {
@@ -1460,18 +1458,17 @@
           { time: "05:00 م - 08:30 م", title: "كورس وتطبيق المبيعات", desc: "تجهيز خطة وعروض AI Automation", color: "text-indigo-400 font-bold" },
           { time: "08:30 م - 10:00 م", title: "وقت راحة ومطالعة", desc: "ملغي: لا يوجد تمرين ولا كسر صيام مسبق ولا دش", color: "text-slate-400" },
           { time: "10:00 م", title: "تناول وجبة الأوماد مباشرة", desc: "سلطة -> بروتين -> قليل كارب (≤ 1000 سعرة)", color: "text-emerald-400 font-bold" },
-          { time: "12:00 ص - 05:00 ف", title: "العمل وممارسة الإنجليزية", desc: "30 دقيقة Gemini Live Chat + كورس نادر وشاي بالسكر المقنن", color: "text-indigo-300" },
+          { time: "12:00 ص - 05:00 ف", title: "العمل وممارسة الإنجليزية", desc: "30 دقيقة Gemini Live Chat + كورس نادر وشاي بالسكر المقنن", color: "text-indigo-300 font-semibold" },
           { time: "05:00 فجراً", title: "النوم", desc: "الخلود إلى النوم", color: "text-slate-400" }
         ];
       }
 
+      // Vertical stack layout: Time -> Title -> Description
       container.innerHTML = timelineItems.map(item => `
-        <div class="relative timeline-dot pb-2">
-          <div class="flex items-center justify-between">
-            <span class="font-extrabold ${item.color}">${item.time}</span>
-            <span class="text-[11px] text-slate-400">${item.title}</span>
-          </div>
-          <div class="text-[11px] text-slate-400 mt-0.5 leading-snug">${item.desc}</div>
+        <div class="relative timeline-dot pb-3 space-y-0.5">
+          <div class="font-black ${item.color}">${item.time}</div>
+          <div class="font-bold text-xs text-slate-100 theme-text-primary">${item.title}</div>
+          <div class="text-[11px] text-slate-400 theme-text-muted leading-relaxed">${item.desc}</div>
         </div>
       `).join('');
     }
@@ -1547,6 +1544,7 @@
 
       renderActiveDayView();
       renderDaysMatrix();
+      renderAnalyticsView();
       await saveState();
     }
 
@@ -1564,6 +1562,7 @@
 
       renderActiveDayView();
       renderDaysMatrix();
+      renderAnalyticsView();
       await saveState();
     }
 
@@ -1626,6 +1625,7 @@
           day.photos.push(photoObj);
           renderDailyPhotos(day);
           renderGlobalPhotosGallery();
+          renderDaysMatrix();
           await saveState();
           showToast("تم رفع وضغط صورة التوثيق وحفظها سحابياً!", "success");
         };
@@ -1648,9 +1648,15 @@
       }
 
       container.innerHTML = photos.map((p) => `
-        <div class="relative group rounded-xl overflow-hidden border border-slate-800 aspect-square bg-slate-900 cursor-pointer" onclick="openImagePreview('${p.src}', 'اليوم ${day.dayNumber} (${p.timestamp})', '${p.id}', ${day.dayNumber})">
-          <img src="${p.src}" alt="صورة توثيق" class="w-full h-full object-cover group-hover:scale-105 transition">
-          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
+        <div class="relative group rounded-xl overflow-hidden border border-slate-800 aspect-square bg-slate-900 cursor-pointer">
+          <img src="${p.src}" alt="صورة توثيق" class="w-full h-full object-cover group-hover:scale-105 transition" onclick="openImagePreview('${p.src}', 'اليوم ${day.dayNumber} (${p.timestamp})', '${p.id}', ${day.dayNumber})">
+          
+          <!-- Delete Icon Button directly on card -->
+          <button onclick="event.stopPropagation(); window.deletePhoto('${p.id}', ${day.dayNumber})" title="حذف الصورة" class="absolute top-1.5 left-1.5 w-6 h-6 rounded-lg bg-red-600/80 hover:bg-red-600 text-white flex items-center justify-center transition shadow shadow-black/50 active:scale-95 z-10">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+          </button>
+
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-[11px] font-bold pointer-events-none">
             تكبير 🔍
           </div>
         </div>
@@ -1694,12 +1700,18 @@
       }
 
       grid.innerHTML = allPhotos.map(p => `
-        <div class="glass-card rounded-xl overflow-hidden border border-slate-800 flex flex-col group cursor-pointer" onclick="openImagePreview('${p.src}', 'اليوم ${p.dayNumber} - ${p.dayName} ${p.dateFormatted}', '${p.id}', ${p.dayNumber})">
+        <div class="glass-card rounded-xl overflow-hidden border border-slate-800 flex flex-col group cursor-pointer relative">
           <div class="aspect-square bg-slate-900 overflow-hidden relative">
-            <img src="${p.src}" alt="توثيق" class="w-full h-full object-cover group-hover:scale-105 transition">
-            <span class="absolute top-1.5 right-1.5 px-2 py-0.5 rounded-full bg-slate-950/80 text-[10px] text-white font-bold backdrop-blur-sm">
+            <img src="${p.src}" alt="توثيق" class="w-full h-full object-cover group-hover:scale-105 transition" onclick="openImagePreview('${p.src}', 'اليوم ${p.dayNumber} - ${p.dayName} ${p.dateFormatted}', '${p.id}', ${p.dayNumber})">
+            
+            <span class="absolute top-1.5 right-1.5 px-2 py-0.5 rounded-full bg-slate-950/80 text-[10px] text-white font-bold backdrop-blur-sm pointer-events-none">
               يوم ${p.dayNumber}
             </span>
+
+            <!-- Direct Delete Button on Thumbnail -->
+            <button onclick="event.stopPropagation(); window.deletePhoto('${p.id}', ${p.dayNumber})" title="حذف الصورة" class="absolute top-1.5 left-1.5 w-6 h-6 rounded-lg bg-red-600/80 hover:bg-red-600 text-white flex items-center justify-center transition shadow shadow-black/50 active:scale-95 z-10">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            </button>
           </div>
           <div class="p-2 text-[10px] text-slate-400 flex items-center justify-between">
             <span>${p.dayName}</span>
@@ -1732,18 +1744,21 @@
       document.getElementById('image-preview-modal').classList.add('hidden');
     }
 
-    async function deletePhoto(photoId, dayNum) {
+    function deletePhoto(photoId, dayNum) {
       if (!checkCanEdit()) return;
 
-      const day = appState.days[dayNum - 1];
-      if (!day || !day.photos) return;
+      showCustomConfirm("حذف الصورة نهائياً", `هل أنت متأكد من رغبتك في حذف صورة اليوم ${dayNum}؟`, async () => {
+        const day = appState.days ? appState.days[dayNum - 1] : null;
+        if (!day || !day.photos) return;
 
-      day.photos = day.photos.filter(p => p.id !== photoId);
-      closeImagePreview();
-      renderDailyPhotos(day);
-      renderGlobalPhotosGallery();
-      await saveState();
-      showToast("تم حذف الصورة سحابياً بنجاح.", "info");
+        day.photos = day.photos.filter(p => p.id !== photoId);
+        closeImagePreview();
+        renderDailyPhotos(day);
+        renderGlobalPhotosGallery();
+        renderDaysMatrix();
+        await saveState();
+        showToast("تم حذف الصورة بنجاح وتحديث السحابة.", "info");
+      });
     }
 
     function changeActiveDay(delta) {
@@ -1860,7 +1875,6 @@
 
       if (!appState.weightLogs) appState.weightLogs = [];
 
-      // If user logs Day 1 and start weight hasn't been set yet, set it automatically
       if (dayNum === 1 && (appState.weightSettings?.startWeight === null || appState.weightSettings?.startWeight === undefined)) {
         if (!appState.weightSettings) appState.weightSettings = {};
         appState.weightSettings.startWeight = weightVal;
@@ -1924,7 +1938,6 @@
         appState.weightLogs[logIndex].note = newNote;
       }
 
-      // If updating Day 1 and start weight was tied to it
       if (dayNum === 1 && appState.weightSettings) {
         appState.weightSettings.startWeight = newWeight;
         const startInput = document.getElementById('start-weight-input');
@@ -2122,44 +2135,237 @@
     }
 
     function renderAnalyticsView() {
-      let totalSalesTasks = 0;
-      let completedSalesTasks = 0;
-      let totalWorkTasks = 0;
-      let completedWorkTasks = 0;
+      // Metric Accumulators
+      let englishTotal = 0, englishDone = 0;
+      let dietTotal = 0, dietDone = 0;
+      let workoutTotal = 0, workoutDone = 0;
+      let elokabyTotal = 0, elokabyDone = 0;
+      let salesTotal = 0, salesDone = 0;
+      let sugarTotal = 0, sugarDone = 0;
 
       if (appState.days) {
         appState.days.forEach(d => {
           d.tasks.forEach(t => {
-            if (t.category === 'sales') {
-              totalSalesTasks++;
-              if (t.completed) completedSalesTasks++;
+            if (t.category === 'english') {
+              englishTotal++;
+              if (t.completed) englishDone++;
+            }
+            if (t.category === 'diet') {
+              dietTotal++;
+              if (t.completed) dietDone++;
+            }
+            if (t.category === 'workout' && t.id.includes('workout')) {
+              workoutTotal++;
+              if (t.completed) workoutDone++;
             }
             if (t.category === 'work') {
-              totalWorkTasks++;
-              if (t.completed) completedWorkTasks++;
+              elokabyTotal++;
+              if (t.completed) elokabyDone++;
+            }
+            if (t.category === 'sales') {
+              salesTotal++;
+              if (t.completed) salesDone++;
+            }
+            if (t.category === 'tea') {
+              sugarTotal++;
+              if (t.completed) sugarDone++;
             }
           });
         });
       }
 
-      const salesPct = totalSalesTasks > 0 ? Math.round((completedSalesTasks / totalSalesTasks) * 100) : 0;
-      document.getElementById('sales-progress-label').innerText = `${completedSalesTasks} من ${totalSalesTasks} خطوة (${salesPct}%)`;
-      document.getElementById('sales-progress-bar').style.width = `${salesPct}%`;
+      // Percentage calculators
+      const englishPct = englishTotal > 0 ? Math.round((englishDone / englishTotal) * 100) : 0;
+      const dietPct = dietTotal > 0 ? Math.round((dietDone / dietTotal) * 100) : 0;
+      const workoutPct = workoutTotal > 0 ? Math.round((workoutDone / workoutTotal) * 100) : 0;
+      const elokabyPct = elokabyTotal > 0 ? Math.round((elokabyDone / elokabyTotal) * 100) : 0;
+      const salesPct = salesTotal > 0 ? Math.round((salesDone / salesTotal) * 100) : 0;
+      const sugarPct = sugarTotal > 0 ? Math.round((sugarDone / sugarTotal) * 100) : 0;
 
-      const videosCount = Math.round(completedWorkTasks * 1.2);
-      document.getElementById('media-buyer-videos-count').innerText = `${videosCount} فيديو منتج`;
-      const mediaPct = totalWorkTasks > 0 ? Math.round((completedWorkTasks / totalWorkTasks) * 100) : 0;
-      document.getElementById('media-progress-bar').style.width = `${mediaPct}%`;
+      // Overall Score
+      const allPillars = [englishPct, dietPct, workoutPct, elokabyPct, salesPct, sugarPct];
+      const overallAvg = Math.round(allPillars.reduce((a, b) => a + b, 0) / 6);
 
-      const currentDay = appState.days ? appState.days[appState.activeDayIndex - 1] : null;
-      if (currentDay) {
-        document.getElementById('sugar-current-milestone').innerText = `${currentDay.sugarAllowance} (أسبوع ${currentDay.weekNumber})`;
+      const overallBadge = document.getElementById('tracker-overall-badge');
+      const overallBar = document.getElementById('overall-score-bar');
+      const overallGrade = document.getElementById('overall-score-grade');
+
+      if (overallBadge) overallBadge.innerText = `${overallAvg}% التزام عام`;
+      if (overallBar) overallBar.style.width = `${overallAvg}%`;
+      if (overallGrade) {
+        if (overallAvg >= 80) {
+          overallGrade.innerText = "أسطوري 🟢";
+          overallGrade.className = "text-sm font-extrabold text-emerald-400";
+        } else if (overallAvg >= 50) {
+          overallGrade.innerText = "متوازن 🟡";
+          overallGrade.className = "text-sm font-extrabold text-amber-400";
+        } else {
+          overallGrade.innerText = "يحتاج انضباط 🔴";
+          overallGrade.className = "text-sm font-extrabold text-red-400";
+        }
       }
 
+      // 6 Pillars Array Data Definition
+      const pillars = [
+        {
+          key: "english",
+          icon: "🗣️",
+          title: "ممارسة الإنجليزية (Gemini Live)",
+          desc: "جلسات تدريب صوتية حية يومياً للتواصل مع العملاء",
+          done: englishDone,
+          total: englishTotal,
+          pct: englishPct,
+          statDetail: `${englishDone * 30} دقيقة ممارسة`,
+          accentColor: "sky",
+        },
+        {
+          key: "diet",
+          icon: "🥗",
+          title: "التزام وجبة الأوماد والصيام",
+          desc: "ترتيب الوجبة (سلطة -> بروتين -> قليل كارب) ≤ 1000 سعرة",
+          done: dietDone,
+          total: dietTotal,
+          pct: dietPct,
+          statDetail: `${dietDone} وجبة منضبطة`,
+          accentColor: "teal",
+        },
+        {
+          key: "workout",
+          icon: "🏋️",
+          title: "التدريب البدني المنزلي",
+          desc: "13 تمرين منزلي بالدمبل ووزن الجسم (أحد، ثلاثاء، خميس)",
+          done: workoutDone,
+          total: workoutTotal,
+          pct: workoutPct,
+          statDetail: `${workoutDone} من 13 جلسة تمرين`,
+          accentColor: "amber",
+        },
+        {
+          key: "elokaby",
+          icon: "🎥",
+          title: "شغل صيدليات العقبي (Media Buyer)",
+          desc: "إنتاج الفيديوهات وتست الحملات والزوايا الإعلانية يومياً",
+          done: elokabyDone,
+          total: elokabyTotal,
+          pct: elokabyPct,
+          statDetail: `~${Math.round(elokabyDone * 0.8)} فيديو منتج ومختبر`,
+          accentColor: "emerald",
+        },
+        {
+          key: "sales",
+          icon: "📈",
+          title: "المبيعات وبناء خدمة AI Automation",
+          desc: "دراسة وتطبيق منظومة أتمتة الذكاء الاصطناعي لمدربي اللياقة",
+          done: salesDone,
+          total: salesTotal,
+          pct: salesPct,
+          statDetail: `${salesDone} من 30 خطوة تنفيذية`,
+          accentColor: "indigo",
+        },
+        {
+          key: "sugar",
+          icon: "☕",
+          title: "التدرج في خفض سكر الشاي",
+          desc: "تقنين أسبوعي (1.25 -> 1.0 -> 0.75 -> 0.5 ملعقة)",
+          done: sugarDone,
+          total: sugarTotal,
+          pct: sugarPct,
+          statDetail: `${sugarDone} يوم التزام بالجرعة`,
+          accentColor: "orange",
+        }
+      ];
+
+      // Render 6 Pillars Cards
+      const grid = document.getElementById('six-pillars-grid');
+      if (grid) {
+        grid.innerHTML = pillars.map(p => {
+          let statusLabel = "انضباط ممتاز 🟢";
+          let statusBg = "bg-emerald-500/20 text-emerald-300 border-emerald-500/30";
+          let barBg = "bg-emerald-500";
+
+          if (p.pct < 50) {
+            statusLabel = "تقصير يحتاج تعويض 🔴";
+            statusBg = "bg-red-500/20 text-red-300 border-red-500/30";
+            barBg = "bg-red-500";
+          } else if (p.pct < 80) {
+            statusLabel = "أداء متوسط 🟡";
+            statusBg = "bg-amber-500/20 text-amber-300 border-amber-500/30";
+            barBg = "bg-amber-500";
+          }
+
+          return `
+            <div class="glass-card rounded-2xl p-4 border border-slate-800 space-y-3 flex flex-col justify-between theme-card-subtle">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="text-xl">${p.icon}</span>
+                    <h4 class="font-bold text-xs sm:text-sm text-white theme-text-primary truncate">${p.title}</h4>
+                  </div>
+                  <span class="text-[9px] px-2 py-0.5 rounded-full border ${statusBg} font-bold whitespace-nowrap">${statusLabel}</span>
+                </div>
+                <p class="text-[11px] text-slate-400 theme-text-muted leading-relaxed">${p.desc}</p>
+              </div>
+
+              <div class="space-y-1.5 pt-2 border-t border-slate-800/80">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-bold text-slate-200 theme-text-primary">${p.statDetail}</span>
+                  <span class="font-black text-indigo-400 text-sm">${p.pct}%</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                  <div class="${barBg} h-full rounded-full transition-all duration-500" style="width: ${p.pct}%"></div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500">
+                  <span>تم إنجاز ${p.done} من ${p.total} مهمة</span>
+                  <span>المتبقي: ${p.total - p.done}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Generate Dynamic Diagnostic Insights
+      const diagnosticContainer = document.getElementById('insights-diagnostic-container');
+      if (diagnosticContainer) {
+        const sortedPillars = [...pillars].sort((a, b) => b.pct - a.pct);
+        const topPillar = sortedPillars[0];
+        const lowPillar = sortedPillars[sortedPillars.length - 1];
+
+        const currentActiveDay = appState.days ? appState.days[appState.activeDayIndex - 1] : null;
+        const isCurrentWorkout = currentActiveDay ? currentActiveDay.isWorkoutDay : false;
+
+        diagnosticContainer.innerHTML = `
+          <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-800/40 space-y-1">
+            <div class="font-bold text-emerald-400 flex items-center gap-1.5">
+              <span>🌟 نقطة القوة الأبرز:</span>
+              <span>${topPillar.title} (${topPillar.pct}%)</span>
+            </div>
+            <p class="text-slate-300 theme-text-muted leading-relaxed">
+              أنت تحافظ على نسق وثبات استثنائي في هذا الركن. الاستمرار على هذا المستوى طوال الـ 30 يوماً سيحدث نقلة نوعية في قدراتك ونتائجك.
+            </p>
+          </div>
+
+          <div class="p-3.5 rounded-xl ${lowPillar.pct < 60 ? 'bg-red-950/20 border-red-800/40' : 'bg-amber-950/20 border-amber-800/40'} space-y-1">
+            <div class="font-bold ${lowPillar.pct < 60 ? 'text-red-400' : 'text-amber-400'} flex items-center gap-1.5">
+              <span>⚡ تنبيه التشخيص والاستدراك:</span>
+              <span>${lowPillar.title} (${lowPillar.pct}%)</span>
+            </div>
+            <p class="text-slate-300 theme-text-muted leading-relaxed">
+              ${lowPillar.pct < 60 
+                ? `هذا الركن يسجل أقل معدل إنجاز حالياً (${lowPillar.pct}%). احرص على إتمامه اليوم دون تأجيل لتعويض ما فاتك والحفاظ على توازن التحدي.` 
+                : `جميع الأركان تسير بتوازن ملحوظ! احرص اليوم على ${isCurrentWorkout ? 'جلسة التمرين المنزلي في 8:45 م وجلسة الإنجليزي' : 'وجبة الأوماد المنضبطة وجلسة الإنجليزي 30 دقيقة'} لضمان العلامة الكاملة.`
+              }
+            </p>
+          </div>
+        `;
+      }
+
+      // Sales Curriculum Roadmap
       const curriculumContainer = document.getElementById('sales-curriculum-list');
+      const curriculumPill = document.getElementById('curriculum-status-pill');
       const salesCurriculumData = [
-        { num: 1, title: "المحاضرة 1: فهم عميق لنقاط ألم مدربي اللياقة الأونلاين", app: "صياغة دراسة حالة من عميلك السابق حول المشاكل اليومية للكوتشز" },
-        { num: 2, title: "المحاضرة 2: بناء العرض المغري (Grand Slam Offer) للأتمتة", app: "تحديد باقات وتسعير AI Automation المخصصة للمدربين" },
+        { num: 1, title: "المحاضرة 1: فهم نقاط ألم مدربي اللياقة الأونلاين", app: "صياغة دراسة حالة عن المشاكل اليومية للكوتشز مع المشتركين" },
+        { num: 2, title: "المحاضرة 2: بناء العرض المغري (Grand Slam Offer)", app: "تحديد باقات وتسعير AI Automation المخصصة للمدربين" },
         { num: 3, title: "المحاضرة 3: تصميم رحلة العميل المؤتمتة (Client Journey)", app: "رسم مسار تدفق المشترك من الإعلان إلى رسائل الواتساب/الإنستجرام" },
         { num: 4, title: "المحاضرة 4: سيكولوجية البيع وإقناع المدربين بمضاعفة وقتهم", app: "كتابة سكريبت مبيعات قصير يوضح عائد الاستثمار (ROI) للأتمتة" },
         { num: 5, title: "المحاضرة 5: آلية تجديد الاشتراكات تلقائياً بالذكاء الاصطناعي", app: "بناء تمبلت رسائل تنبيه وتجديد الاشتراكات التلقائية" },
@@ -2174,28 +2380,37 @@
         { num: 14, title: "المحاضرة 14: التوسع وتكرار المنظومة لخدمة اشتراك (Retainer)", app: "تجهيز خطة إطلاق شاملة + قائمة بـ 50 كوتش مستهدف والبدء فوراً" }
       ];
 
-      curriculumContainer.innerHTML = salesCurriculumData.map(item => {
-        const studyDayNum = (item.num * 2) - 1;
-        const appDayNum = item.num * 2;
-        
-        const studyDone = appState.days && appState.days[studyDayNum - 1]?.tasks.find(t => t.category === 'sales')?.completed || false;
-        const appDone = appState.days && appState.days[appDayNum - 1]?.tasks.find(t => t.category === 'sales')?.completed || false;
+      let totalPairsDone = 0;
+      if (curriculumContainer) {
+        curriculumContainer.innerHTML = salesCurriculumData.map(item => {
+          const studyDayNum = (item.num * 2) - 1;
+          const appDayNum = item.num * 2;
+          
+          const studyDone = appState.days && appState.days[studyDayNum - 1]?.tasks.find(t => t.category === 'sales')?.completed || false;
+          const appDone = appState.days && appState.days[appDayNum - 1]?.tasks.find(t => t.category === 'sales')?.completed || false;
 
-        return `
-          <div class="p-3 rounded-xl border ${studyDone && appDone ? 'bg-indigo-950/20 border-indigo-500/40' : 'bg-slate-900/80 border-slate-800 theme-card-subtle'} space-y-1.5">
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-white theme-text-primary text-xs">${item.title}</span>
-              <div class="flex items-center gap-1">
-                <span class="text-[9px] px-1.5 py-0.5 rounded ${studyDone ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-800 text-slate-400'}">دراسة: ${studyDone ? '✓' : '—'}</span>
-                <span class="text-[9px] px-1.5 py-0.5 rounded ${appDone ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-800 text-slate-400'}">تطبيق: ${appDone ? '✓' : '—'}</span>
+          if (studyDone && appDone) totalPairsDone++;
+
+          return `
+            <div class="p-3 rounded-xl border ${studyDone && appDone ? 'bg-indigo-950/20 border-indigo-500/40' : 'bg-slate-900/80 border-slate-800 theme-card-subtle'} space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white theme-text-primary text-xs">${item.title}</span>
+                <div class="flex items-center gap-1">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded ${studyDone ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-800 text-slate-400'}">دراسة: ${studyDone ? '✓' : '—'}</span>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded ${appDone ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-800 text-slate-400'}">تطبيق: ${appDone ? '✓' : '—'}</span>
+                </div>
+              </div>
+              <div class="text-[11px] text-slate-300">
+                <strong class="text-indigo-300">المهمة التطبيقية:</strong> ${item.app}
               </div>
             </div>
-            <div class="text-[11px] text-slate-300">
-              <strong class="text-indigo-300">المهمة التطبيقية:</strong> ${item.app}
-            </div>
-          </div>
-        `;
-      }).join('');
+          `;
+        }).join('');
+      }
+
+      if (curriculumPill) {
+        curriculumPill.innerText = `${totalPairsDone}/14 خطوة مكتملة`;
+      }
     }
 
     function updateGlobalCounters() {
@@ -2221,7 +2436,7 @@
 
       const ring = document.getElementById('header-progress-ring');
       if (ring) {
-        const circumference = 81.68;
+        const circumference = 69.1;
         const offset = circumference - (overallPct / 100) * circumference;
         ring.style.strokeDashoffset = offset;
       }
@@ -2272,6 +2487,7 @@
       renderActiveDayView();
       renderDaysMatrix();
       renderWeightChart();
+      renderAnalyticsView();
       updateShareLinks();
       toggleModal('settings-modal');
       await saveState();
@@ -2345,13 +2561,12 @@
         targetBtn.className = "flex-1 sm:flex-initial px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 bg-indigo-600 text-white shadow-lg shadow-indigo-600/30";
       }
 
-      // Synchronize Mobile Bottom Navigation active indicators
       document.querySelectorAll('[id^="mob-nav-"]').forEach(btn => {
-        btn.className = "flex flex-col items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-white py-1 px-3 transition active:scale-95";
+        btn.className = "flex-1 flex flex-col items-center gap-0.5 text-[10px] font-medium text-slate-400 hover:text-white py-1 px-1 transition active:scale-95";
       });
       const activeMobBtn = document.getElementById(`mob-nav-${tabId}`);
       if (activeMobBtn) {
-        activeMobBtn.className = "flex flex-col items-center gap-1 text-[11px] font-bold text-indigo-400 py-1 px-3 transition active:scale-95 scale-105";
+        activeMobBtn.className = "flex-1 flex flex-col items-center gap-0.5 text-[10px] font-bold text-indigo-400 py-1 px-1 transition active:scale-95 scale-105";
       }
 
       if (tabId === 'today') renderActiveDayView();
@@ -2384,6 +2599,7 @@
           renderDaysMatrix();
           initWeightTracker();
           renderGlobalPhotosGallery();
+          renderAnalyticsView();
           await saveState();
           showToast("تمت إعادة ضبط التحدي بالكامل وتصفير الأوزان سحابياً.", "info");
         }
@@ -2474,6 +2690,7 @@
       renderActiveDayView();
       renderDaysMatrix();
       updateGlobalCounters();
+      renderAnalyticsView();
     };
   </script>
 </body>
