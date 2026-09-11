@@ -123,7 +123,7 @@
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-indigo-600 selection:text-white pb-16 md:pb-6">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-indigo-600 selection:text-white pb-24 md:pb-8">
 
   <!-- Top Navigation Header -->
   <header class="sticky top-0 z-30 glass-card border-b border-slate-800/80 px-4 py-3">
@@ -844,22 +844,83 @@
     </div>
   </div>
 
+  <!-- MODAL: EDIT WEIGHT ENTRY -->
+  <div id="edit-weight-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="glass-card max-w-sm w-full rounded-2xl border border-slate-800 p-5 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h4 class="font-bold text-sm text-white theme-text-primary flex items-center gap-2">
+          <span>✏️ تعديل قياس الوزن</span>
+        </h4>
+        <button onclick="toggleModal('edit-weight-modal')" class="p-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-white theme-card-subtle">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-300 mb-1 theme-text-primary font-semibold">اليوم المحدد:</label>
+          <input type="text" id="edit-weight-day-display" readonly class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-indigo-300 font-bold theme-card-subtle select-none">
+          <input type="hidden" id="edit-weight-day-hidden">
+        </div>
+        <div>
+          <label class="block text-slate-300 mb-1 theme-text-primary font-semibold">الوزن المقاس (كجم):</label>
+          <input type="number" id="edit-weight-val-input" step="0.1" placeholder="مثال: 139.5" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500 theme-card-subtle theme-text-primary font-bold">
+        </div>
+        <div>
+          <label class="block text-slate-300 mb-1 theme-text-primary font-semibold">ملاحظة القياس (اختياري):</label>
+          <input type="text" id="edit-weight-note-input" placeholder="مثال: قياس الصباح بعد الأوماد" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 theme-card-subtle theme-text-primary">
+        </div>
+        <div class="flex gap-2 pt-2">
+          <button onclick="saveEditedWeightLog()" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold text-xs transition shadow-lg shadow-emerald-600/30">
+            حفظ التعديل
+          </button>
+          <button onclick="toggleModal('edit-weight-modal')" class="px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold">
+            إلغاء
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL: Custom Confirmation Modal -->
   <div id="confirm-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="glass-card max-w-sm w-full rounded-2xl border border-slate-800 p-5 space-y-4 shadow-2xl text-center">
       <div class="w-12 h-12 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center mx-auto text-xl">⚠️</div>
       <h4 id="confirm-modal-title" class="font-bold text-sm text-white theme-text-primary">هل أنت متأكد؟</h4>
-      <p id="confirm-modal-msg" class="text-xs text-slate-300">سيتم مسح جميع بيانات التحدي والبدء من جديد.</p>
+      <p id="confirm-modal-msg" class="text-xs text-slate-300">سيتم مسح البيانات المحددة.</p>
       
       <div class="flex items-center gap-2 pt-2">
-        <button id="confirm-modal-cancel" class="flex-1 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">إلغاء</button>
-        <button id="confirm-modal-ok" class="flex-1 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold">نعم، تأكيد</button>
+        <button id="confirm-modal-cancel" class="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">إلغاء</button>
+        <button id="confirm-modal-ok" class="flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold">نعم، تأكيد</button>
       </div>
     </div>
   </div>
 
+  <!-- Mobile Bottom Floating Navigation Bar (Native App Style) -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 glass-card border-t border-slate-800/90 px-2 py-2 flex items-center justify-around backdrop-blur-xl bg-slate-950/90 shadow-2xl">
+    <button onclick="switchTab('today')" id="mob-nav-today" class="flex flex-col items-center gap-1 text-[11px] font-bold text-indigo-400 py-1 px-3 transition active:scale-95">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      <span>اليوم</span>
+    </button>
+    <button onclick="switchTab('matrix')" id="mob-nav-matrix" class="flex flex-col items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-white py-1 px-3 transition active:scale-95">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+      <span>30 يوم</span>
+    </button>
+    <button onclick="switchTab('weight')" id="mob-nav-weight" class="flex flex-col items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-white py-1 px-3 transition active:scale-95">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+      <span>الوزن</span>
+    </button>
+    <button onclick="switchTab('photos')" id="mob-nav-photos" class="flex flex-col items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-white py-1 px-3 transition active:scale-95">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      <span>الصور</span>
+    </button>
+    <button onclick="switchTab('analytics')" id="mob-nav-analytics" class="flex flex-col items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-white py-1 px-3 transition active:scale-95">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+      <span>المبيعات</span>
+    </button>
+  </nav>
+
   <!-- Toast Container -->
-  <div id="toast-container" class="fixed bottom-4 left-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+  <div id="toast-container" class="fixed bottom-20 md:bottom-4 left-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -1808,6 +1869,85 @@
       showToast(`تم تسجيل وتحديث وزن اليوم ${dayNum}: ${weightVal} كجم سحابياً!`, "success");
     }
 
+    function openEditWeightModal(dayNum) {
+      if (!checkCanEdit()) return;
+      const log = (appState.weightLogs || []).find(l => l.day === dayNum);
+      if (!log) return;
+
+      const dayObj = appState.days ? appState.days[dayNum - 1] : null;
+      const dayLabel = `اليوم ${dayNum} ${dayObj ? `(${dayObj.dayName} ${dayObj.dateFormatted})` : ''}`;
+
+      document.getElementById('edit-weight-day-display').value = dayLabel;
+      document.getElementById('edit-weight-day-hidden').value = dayNum;
+      document.getElementById('edit-weight-val-input').value = log.weight;
+      document.getElementById('edit-weight-note-input').value = log.note || "";
+
+      toggleModal('edit-weight-modal');
+    }
+
+    async function saveEditedWeightLog() {
+      if (!checkCanEdit()) return;
+
+      const dayNum = parseInt(document.getElementById('edit-weight-day-hidden').value);
+      const newWeight = parseFloat(document.getElementById('edit-weight-val-input').value);
+      const newNote = document.getElementById('edit-weight-note-input').value.trim();
+
+      if (!newWeight || isNaN(newWeight) || newWeight <= 0) {
+        showToast("يرجى إدخال وزن صحيح بالكيلوجرام", "warning");
+        return;
+      }
+
+      const logIndex = (appState.weightLogs || []).findIndex(l => l.day === dayNum);
+      if (logIndex >= 0) {
+        appState.weightLogs[logIndex].weight = newWeight;
+        appState.weightLogs[logIndex].note = newNote;
+      }
+
+      // If updating Day 1 and start weight was tied to it
+      if (dayNum === 1 && appState.weightSettings) {
+        appState.weightSettings.startWeight = newWeight;
+        const startInput = document.getElementById('start-weight-input');
+        if (startInput) startInput.value = newWeight;
+      }
+
+      toggleModal('edit-weight-modal');
+      renderWeightLogs();
+      renderWeightChart();
+      await saveState();
+      showToast(`تم تعديل وزن اليوم ${dayNum} إلى ${newWeight} كجم بنجاح!`, "success");
+    }
+
+    function deleteWeightLog(dayNum) {
+      if (!checkCanEdit()) return;
+      showCustomConfirm("حذف قياس الوزن", `هل أنت متأكد من حذف قياس وزن اليوم ${dayNum}؟`, async () => {
+        appState.weightLogs = (appState.weightLogs || []).filter(l => l.day !== dayNum);
+        renderWeightLogs();
+        renderWeightChart();
+        await saveState();
+        showToast(`تم حذف قياس وزن اليوم ${dayNum} بنجاح.`, "info");
+      });
+    }
+
+    function showCustomConfirm(title, msg, onConfirm) {
+      const modal = document.getElementById('confirm-modal');
+      const titleEl = document.getElementById('confirm-modal-title');
+      const msgEl = document.getElementById('confirm-modal-msg');
+      const cancelBtn = document.getElementById('confirm-modal-cancel');
+      const okBtn = document.getElementById('confirm-modal-ok');
+
+      titleEl.innerText = title;
+      msgEl.innerText = msg;
+
+      modal.classList.remove('hidden');
+      cancelBtn.onclick = () => modal.classList.add('hidden');
+      okBtn.onclick = async () => {
+        modal.classList.add('hidden');
+        if (typeof onConfirm === 'function') {
+          await onConfirm();
+        }
+      };
+    }
+
     function renderWeightLogs() {
       const logs = appState.weightLogs || [];
       const startW = appState.weightSettings?.startWeight;
@@ -1832,7 +1972,7 @@
 
       const listContainer = document.getElementById('recent-weights-list');
       if (logs.length === 0) {
-        listContainer.innerHTML = `<div class="text-slate-500 py-2">لا توجد قياسات مسجلة بعد.</div>`;
+        listContainer.innerHTML = `<div class="text-slate-500 py-3 text-center">لا توجد قياسات مسجلة بعد. أدخل قراءتك الأولى بالأعلى.</div>`;
         return;
       }
 
@@ -1840,12 +1980,20 @@
         const dayObj = appState.days ? appState.days[l.day - 1] : null;
         const dateTag = dayObj ? `(${dayObj.dayName} ${dayObj.dateFormatted})` : '';
         return `
-          <div class="flex items-center justify-between p-2 rounded-lg bg-slate-900/90 border border-slate-800 theme-card-subtle">
-            <div class="flex items-center gap-2">
-              <span class="font-bold text-emerald-400">${l.weight} كجم</span>
-              <span class="text-slate-400">| يوم ${l.day} ${dateTag}</span>
+          <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 transition gap-2 theme-card-subtle">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="font-bold text-emerald-400 text-sm whitespace-nowrap">${l.weight} كجم</span>
+              <span class="text-slate-400 text-[11px] truncate">يوم ${l.day} ${dateTag}</span>
+              ${l.note ? `<span class="text-[10px] text-slate-500 truncate hidden sm:inline" title="${l.note}">• ${l.note}</span>` : ''}
             </div>
-            <span class="text-[11px] text-slate-400 truncate max-w-[120px]">${l.note || ''}</span>
+            <div class="flex items-center gap-1.5 flex-shrink-0">
+              <button onclick="window.openEditWeightModal(${l.day})" title="تعديل القياس" class="p-1.5 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/40 text-indigo-300 hover:text-white transition active:scale-95">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+              </button>
+              <button onclick="window.deleteWeightLog(${l.day})" title="حذف القياس" class="p-1.5 rounded-lg bg-red-600/20 hover:bg-red-600/40 text-red-400 hover:text-red-200 transition active:scale-95">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+              </button>
+            </div>
           </div>
         `;
       }).join('');
@@ -2176,6 +2324,15 @@
         targetBtn.className = "flex-1 sm:flex-initial px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 bg-indigo-600 text-white shadow-lg shadow-indigo-600/30";
       }
 
+      // Synchronize Mobile Bottom Navigation active indicators
+      document.querySelectorAll('[id^="mob-nav-"]').forEach(btn => {
+        btn.className = "flex flex-col items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-white py-1 px-3 transition active:scale-95";
+      });
+      const activeMobBtn = document.getElementById(`mob-nav-${tabId}`);
+      if (activeMobBtn) {
+        activeMobBtn.className = "flex flex-col items-center gap-1 text-[11px] font-bold text-indigo-400 py-1 px-3 transition active:scale-95 scale-105";
+      }
+
       if (tabId === 'today') renderActiveDayView();
       if (tabId === 'matrix') renderDaysMatrix();
       if (tabId === 'weight') initWeightTracker();
@@ -2196,24 +2353,20 @@
         return;
       }
 
-      const modal = document.getElementById('confirm-modal');
-      const cancelBtn = document.getElementById('confirm-modal-cancel');
-      const okBtn = document.getElementById('confirm-modal-ok');
-
-      modal.classList.remove('hidden');
-      cancelBtn.onclick = () => modal.classList.add('hidden');
-
-      okBtn.onclick = async () => {
-        modal.classList.add('hidden');
-        appState = JSON.parse(JSON.stringify(defaultState));
-        appState.days = generateDaysBlueprint(appState.startDate);
-        renderActiveDayView();
-        renderDaysMatrix();
-        initWeightTracker();
-        renderGlobalPhotosGallery();
-        await saveState();
-        showToast("تمت إعادة ضبط التحدي بالكامل وتصفير الأوزان سحابياً.", "info");
-      };
+      showCustomConfirm(
+        "تصفير التحدي الشامل",
+        "سيتم مسح جميع بيانات التحدي والأوزان المحفوظة سحابياً والبدء من جديد.",
+        async () => {
+          appState = JSON.parse(JSON.stringify(defaultState));
+          appState.days = generateDaysBlueprint(appState.startDate);
+          renderActiveDayView();
+          renderDaysMatrix();
+          initWeightTracker();
+          renderGlobalPhotosGallery();
+          await saveState();
+          showToast("تمت إعادة ضبط التحدي بالكامل وتصفير الأوزان سحابياً.", "info");
+        }
+      );
     }
 
     function exportBackupData() {
@@ -2290,6 +2443,9 @@
     window.deletePhoto = deletePhoto;
     window.renderGlobalPhotosGallery = renderGlobalPhotosGallery;
     window.copySpecificLink = copySpecificLink;
+    window.openEditWeightModal = openEditWeightModal;
+    window.saveEditedWeightLog = saveEditedWeightLog;
+    window.deleteWeightLog = deleteWeightLog;
 
     window.onload = async function() {
       applyTheme(currentTheme);
