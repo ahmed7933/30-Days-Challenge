@@ -237,15 +237,6 @@
       </button>
     </div>
 
-    <!-- Compact Cloud Sync Notification Pill -->
-    <div id="cloud-banner-info" class="glass-card border border-indigo-500/20 rounded-xl p-2 px-3 flex items-center justify-between text-[11px] bg-indigo-950/20">
-      <div class="flex items-center gap-2 min-w-0">
-        <span class="text-emerald-400 font-bold flex-shrink-0">🟢 سحابي:</span>
-        <span class="text-slate-300 theme-text-muted truncate">مزامنة فورية لكل نقرة وصورة مع هاتفك والكمبيوتر</span>
-      </div>
-      <button onclick="openShareModal()" class="text-indigo-400 font-bold hover:underline flex-shrink-0 mr-2 text-[10px]">مشاركة 🔗</button>
-    </div>
-
     <!-- Navigation Tabs (Hidden on mobile to prevent duplicate navigation and clutter) -->
     <div class="hidden md:flex items-center justify-between flex-wrap gap-3 pb-1 border-b border-slate-800">
       <div class="inline-flex p-1 bg-slate-900/90 border border-slate-800/80 rounded-2xl theme-card-subtle">
@@ -1043,6 +1034,12 @@
             completed: false
           },
           {
+            id: `t_${i}_english`,
+            text: "ممارسة اللغة الإنجليزية لمدة 30 دقيقة عبر Gemini Live Chat للتواصل مع العملاء",
+            category: "english",
+            completed: false
+          },
+          {
             id: `t_${i}_sugar`,
             text: `الالتزام بجرعة سكر الشاي المحددة: ${sugarAllowance} فقط`,
             category: "tea",
@@ -1191,6 +1188,24 @@
           if (snap.exists()) {
             const remoteData = snap.data();
             if (remoteData && remoteData.days && remoteData.days.length === 30) {
+              // Ensure English task exists in saved data for seamless migration
+              remoteData.days.forEach((d) => {
+                if (d.tasks && !d.tasks.some(t => t.category === "english")) {
+                  const salesIdx = d.tasks.findIndex(t => t.category === "sales");
+                  const englishTask = {
+                    id: `t_${d.dayNumber}_english`,
+                    text: "ممارسة اللغة الإنجليزية لمدة 30 دقيقة عبر Gemini Live Chat للتواصل مع العملاء",
+                    category: "english",
+                    completed: false
+                  };
+                  if (salesIdx !== -1) {
+                    d.tasks.splice(salesIdx + 1, 0, englishTask);
+                  } else {
+                    d.tasks.push(englishTask);
+                  }
+                }
+              });
+
               appState = remoteData;
               renderActiveDayView();
               renderDaysMatrix();
@@ -1444,7 +1459,7 @@
           { time: "08:45 م - 09:30 م", title: "التمرين المنزلي (45 دقيقة)", desc: "تمارين وزن الجسم والدمبل بشدة عالية", color: "text-amber-300 font-bold" },
           { time: "09:30 م - 10:00 م", title: "الاستحمام والانتعاش", desc: "راحة وإعداد الوجبة", color: "text-slate-300" },
           { time: "10:00 م", title: "وجبة الأوماد الرئيسية", desc: "سلطة أولاً -> بروتين -> قليل كارب (≤ 1000 سعرة)", color: "text-emerald-400 font-bold" },
-          { time: "12:00 ص - 05:00 ف", title: "متابعة العمل وكورس نادر", desc: "شاي بالسكر المحدد + مراجعة المهام", color: "text-indigo-300" },
+          { time: "12:00 ص - 05:00 ف", title: "العمل وممارسة الإنجليزية", desc: "30 دقيقة Gemini Live Chat + كورس نادر وشاي بالسكر المحدد", color: "text-indigo-300" },
           { time: "05:00 فجراً", title: "النوم", desc: "راحة تامة لمدة 6.5 ساعة", color: "text-slate-400" }
         ];
       } else if (day.isFriday) {
@@ -1458,7 +1473,7 @@
           { time: "05:00 م - 08:30 م", title: "كورس وتطبيق المبيعات", desc: "دراسة وتطبيق منظومة الأتمتة للكوتشز", color: "text-indigo-400 font-bold" },
           { time: "08:30 م - 10:00 م", title: "وقت راحة واستجمام", desc: "لا يوجد تمرين ولا كسر صيام", color: "text-slate-400" },
           { time: "10:00 م - 11:00 م", title: "الوجبة الثانية الكبيرة", desc: "حوالي 1000 سعرة لتنشيط الحرق ومنع الثبات", color: "text-emerald-400 font-bold" },
-          { time: "12:00 ص - 05:00 ف", title: "العمل ومتابعة كورس نادر", desc: "مراجعة اليوم والشاي بنصف ملعقة", color: "text-indigo-300" },
+          { time: "12:00 ص - 05:00 ف", title: "العمل وممارسة الإنجليزية", desc: "30 دقيقة Gemini Live Chat + كورس نادر وشاي بنصف ملعقة", color: "text-indigo-300" },
           { time: "05:00 فجراً", title: "النوم", desc: "نوم مريح استعداداً للأسبوع القادم", color: "text-slate-400" }
         ];
       } else {
@@ -1471,7 +1486,7 @@
           { time: "05:00 م - 08:30 م", title: "كورس وتطبيق المبيعات", desc: "تجهيز خطة وعروض AI Automation", color: "text-indigo-400 font-bold" },
           { time: "08:30 م - 10:00 م", title: "وقت راحة ومطالعة", desc: "ملغي: لا يوجد تمرين ولا كسر صيام مسبق ولا دش", color: "text-slate-400" },
           { time: "10:00 م", title: "تناول وجبة الأوماد مباشرة", desc: "سلطة -> بروتين -> قليل كارب (≤ 1000 سعرة)", color: "text-emerald-400 font-bold" },
-          { time: "12:00 ص - 05:00 ف", title: "متابعات العمل وكورس نادر", desc: "شاي بالسكر المقنن + مراجعة المهام", color: "text-indigo-300" },
+          { time: "12:00 ص - 05:00 ف", title: "العمل وممارسة الإنجليزية", desc: "30 دقيقة Gemini Live Chat + كورس نادر وشاي بالسكر المقنن", color: "text-indigo-300" },
           { time: "05:00 فجراً", title: "النوم", desc: "الخلود إلى النوم", color: "text-slate-400" }
         ];
       }
@@ -1510,6 +1525,7 @@
         let categoryName = "عام";
         if (task.category === "work") { badgeColor = "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"; categoryName = "العقبي"; }
         if (task.category === "sales") { badgeColor = "bg-indigo-500/20 text-indigo-400 border-indigo-500/30"; categoryName = "المبيعات"; }
+        if (task.category === "english") { badgeColor = "bg-sky-500/20 text-sky-400 border-sky-500/30"; categoryName = "إنجليزي"; }
         if (task.category === "diet") { badgeColor = "bg-teal-500/20 text-teal-400 border-teal-500/30"; categoryName = "الدايت"; }
         if (task.category === "workout") { badgeColor = "bg-amber-500/20 text-amber-400 border-amber-500/30"; categoryName = "التمرين"; }
         if (task.category === "tea") { badgeColor = "bg-orange-500/20 text-orange-400 border-orange-500/30"; categoryName = "السكر"; }
