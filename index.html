@@ -16,7 +16,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Tailwind Configuration with Theme Extensions -->
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -192,7 +191,6 @@
         <button onclick="openShareModal()" title="مشاركة الرابط مع صديق أو مدرب" class="px-3 py-1.5 rounded-xl bg-indigo-600/20 border border-indigo-500/40 hover:bg-indigo-600/30 transition text-indigo-300 hover:text-white flex items-center gap-2 text-xs font-bold">
           <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
           <span class="hidden lg:inline">مشاركة</span>
-          <span id="cloud-sync-status-dot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" title="متصل سحابياً"></span>
         </button>
 
         <!-- Settings Modal Button -->
@@ -225,7 +223,7 @@
         <span class="p-1.5 rounded-lg bg-indigo-500/20 text-indigo-400 text-sm">📡</span>
         <div>
           <span class="font-bold text-indigo-200">المزامنة السحابية الحية (Realtime Cloud Sync):</span>
-          <span class="text-slate-300 block sm:inline mt-0.5 sm:mt-0">أي مهمة تعلم عليها، وزن تسجله، أو ملاحظة تدونها تُحفظ فوراً في السحابة وتنعكس في نفس اللحظة على هاتفك والكمبيوتر.</span>
+          <span class="text-slate-300 block sm:inline mt-0.5 sm:mt-0">أي مهمة تعلم عليها، وزن تدخله، أو صورة ترفعها تُحفظ فوراً في السحابة وتنعكس في نفس اللحظة على هاتفك والكمبيوتر.</span>
         </div>
       </div>
       <div class="flex items-center gap-2 self-end sm:self-auto">
@@ -321,7 +319,7 @@
         <div class="flex items-center gap-3 w-full md:w-auto justify-end">
           <div class="text-right">
             <div class="text-xs text-slate-400 theme-text-muted">إنجاز اليوم</div>
-            <div id="day-task-count" class="text-sm font-bold text-indigo-300">0 من 5 مكتملة</div>
+            <div id="day-task-count" class="text-sm font-bold text-indigo-300">0 من 6 مكتملة</div>
           </div>
           <button onclick="markCurrentDayComplete()" id="btn-quick-complete" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold text-xs sm:text-sm transition flex items-center gap-2 shadow-lg shadow-emerald-600/30">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
@@ -352,11 +350,11 @@
             <!-- Helpful Dietary Order Box -->
             <div class="mt-6 p-3 rounded-xl bg-indigo-950/40 border border-indigo-800/40 text-xs space-y-1.5">
               <div class="font-bold text-indigo-200 flex items-center gap-1.5">
-                <span>🥗 ترتيب وجبة الأوماد (حرصاً على سكر الدم):</span>
+                <span>🥗 ترتيب وجبة الأوماد (حرصاً على استقرار سكر الدم):</span>
               </div>
               <p class="text-slate-300 leading-relaxed">
-                1. <strong class="text-emerald-400">السلطة الخضراء أولاً</strong> لملء المعدة بالألياف.<br>
-                2. <strong class="text-sky-300">البروتين والخضار ثانياً</strong> (فراخ / كشري / عدس / فول بالبيض).<br>
+                1. <strong class="text-emerald-400">السلطة الخضراء أولاً</strong> لملء المعدة بالألياف الصحية.<br>
+                2. <strong class="text-sky-300">البروتين والخضار ثانياً</strong> (فراخ / كشري / عدس / فول بالبيض وطماطم).<br>
                 3. <strong class="text-amber-300">كارب قليل في النهاية</strong> (أرز قليل أو ربع رغيف عيش)، دون تخطي 1000 سعرة.
               </p>
             </div>
@@ -372,7 +370,7 @@
                   <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
                   قائمة المهام اليومية
                 </h3>
-                <p class="text-xs text-slate-400 theme-text-muted mt-0.5">اضغط على أي مهمة للتعليم عليها وتحديث السحابة</p>
+                <p class="text-xs text-slate-400 theme-text-muted mt-0.5">اضغط على أي مهمة للتعليم عليها وحفظها سحابياً</p>
               </div>
               <div id="day-progress-pill" class="px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300">
                 0%
@@ -401,7 +399,7 @@
                   <span>إضافة صورة لليوم</span>
                   <input type="file" id="daily-photo-input" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)">
                 </label>
-                <span class="text-[11px] text-slate-500">يتم ضغط الصورة وحفظها سحابياً لحسابك</span>
+                <span class="text-[11px] text-slate-500">يتم ضغط الصورة وحفظها سحابياً لحسابك فوراً</span>
               </div>
 
               <!-- Current Day Photo Thumbnails -->
@@ -454,16 +452,16 @@
       </div>
     </div>
 
-    <!-- VIEW 3: WEIGHT TRACKER & CHART -->
+    <!-- VIEW 3: WEIGHT TRACKER & CHART (FULLY DYNAMIC & MANUAL) -->
     <div id="view-weight" class="tab-view hidden space-y-6">
       
-      <!-- Top Metrics Cards -->
+      <!-- Top Metrics Cards: completely customizable -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
         <div class="glass-card rounded-2xl p-4 border border-slate-800">
           <div class="text-xs text-slate-400 theme-text-muted">وزن البداية (اليوم 1)</div>
           <div class="flex items-baseline gap-2 mt-1">
-            <input type="number" id="start-weight-input" step="0.1" value="95.0" class="w-24 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-lg font-bold text-white focus:outline-none focus:border-indigo-500 theme-card-subtle theme-text-primary" onchange="updateWeightSettings()">
+            <input type="number" id="start-weight-input" step="0.1" placeholder="أدخل الوزن" class="w-28 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-lg font-bold text-white focus:outline-none focus:border-indigo-500 theme-card-subtle theme-text-primary" oninput="updateWeightSettings()">
             <span class="text-xs text-slate-400">كجم</span>
           </div>
         </div>
@@ -471,7 +469,7 @@
         <div class="glass-card rounded-2xl p-4 border border-slate-800">
           <div class="text-xs text-slate-400 theme-text-muted">الوزن الحالي المسجل</div>
           <div class="flex items-baseline gap-2 mt-1">
-            <span id="current-weight-val" class="text-2xl font-black text-emerald-400">95.0</span>
+            <span id="current-weight-val" class="text-2xl font-black text-emerald-400">---</span>
             <span class="text-xs text-slate-400">كجم</span>
           </div>
         </div>
@@ -479,7 +477,7 @@
         <div class="glass-card rounded-2xl p-4 border border-slate-800">
           <div class="text-xs text-slate-400 theme-text-muted">الوزن المستهدف (اليوم 30)</div>
           <div class="flex items-baseline gap-2 mt-1">
-            <input type="number" id="target-weight-input" step="0.1" value="88.0" class="w-24 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-lg font-bold text-amber-400 focus:outline-none focus:border-amber-500 theme-card-subtle" onchange="updateWeightSettings()">
+            <input type="number" id="target-weight-input" step="0.1" placeholder="أدخل الهدف" class="w-28 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-lg font-bold text-amber-400 focus:outline-none focus:border-amber-500 theme-card-subtle" oninput="updateWeightSettings()">
             <span class="text-xs text-slate-400">كجم</span>
           </div>
         </div>
@@ -514,12 +512,12 @@
 
             <div>
               <label class="block text-xs text-slate-300 mb-1 theme-text-primary">الوزن المقاس (كجم):</label>
-              <input type="number" id="log-weight-value-input" step="0.1" placeholder="مثال: 93.5" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500 theme-card-subtle theme-text-primary">
+              <input type="number" id="log-weight-value-input" step="0.1" placeholder="مثال: 139.2" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500 theme-card-subtle theme-text-primary">
             </div>
 
             <div>
               <label class="block text-xs text-slate-300 mb-1 theme-text-primary">ملاحظة القياس (اختياري):</label>
-              <input type="text" id="log-weight-note-input" placeholder="مثلاً: بعد اليوم الفري / تمرين شديد" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 theme-card-subtle theme-text-primary">
+              <input type="text" id="log-weight-note-input" placeholder="مثلاً: بعد وجبة الأوماد / قياس الصباح" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 theme-card-subtle theme-text-primary">
             </div>
 
             <button onclick="saveWeightLogEntry()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 active:scale-95 text-white font-bold text-xs transition shadow-lg shadow-emerald-600/20">
@@ -648,7 +646,7 @@
 
   </main>
 
-  <!-- MODAL: SETTINGS & CHALLENGE CONFIGURATION (Vercel Ready) -->
+  <!-- MODAL: SETTINGS & CHALLENGE CONFIGURATION -->
   <div id="settings-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="glass-card max-w-2xl w-full rounded-2xl border border-slate-800 p-5 sm:p-6 max-h-[90vh] overflow-y-auto space-y-5 shadow-2xl">
       
@@ -687,30 +685,6 @@
           </div>
         </div>
 
-        <!-- Custom Firebase Config for Standalone Vercel Deployments -->
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3 theme-card-subtle">
-          <div class="flex items-center justify-between">
-            <h4 class="font-bold text-amber-400 text-sm flex items-center gap-2">
-              <span>🔥 إعدادات قاعدة البيانات السحابية (Firebase Config)</span>
-            </h4>
-            <span id="config-status-badge" class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-300 font-semibold">مدمجة وتعمل</span>
-          </div>
-          <p class="text-slate-400 leading-relaxed">
-            التطبيق يحتوي على ربط سحابي يعمل تلقائياً. وإذا قمت برفعه مستقبلاً على Vercel بدون متغيرات بيئة، يمكنك لصق كود مشروع Firebase المجاني هنا للاتصال المباشر بقاعدتك الخاصة:
-          </p>
-
-          <div>
-            <label class="block text-slate-300 mb-1">بيانات Firebase JSON (اختياري عند النشر المستقل):</label>
-            <textarea id="setting-firebase-json" rows="3" placeholder='{"apiKey": "...", "authDomain": "...", "projectId": "..."}' class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white font-mono focus:outline-none focus:border-indigo-500"></textarea>
-          </div>
-
-          <div class="flex justify-end pt-1">
-            <button onclick="saveCustomFirebaseConfig()" class="px-4 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold transition">
-              حفظ إعدادات قاعدة البيانات
-            </button>
-          </div>
-        </div>
-
         <!-- Role Passcodes & Security -->
         <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3 theme-card-subtle">
           <h4 class="font-bold text-emerald-400 text-sm flex items-center gap-2">
@@ -738,23 +712,10 @@
           </div>
         </div>
 
-        <!-- How to Deploy on Vercel Guide -->
-        <div class="p-4 rounded-xl bg-indigo-950/40 border border-indigo-800/50 space-y-2">
-          <h4 class="font-bold text-indigo-300 text-sm flex items-center gap-2">
-            <span>🚀 كيفية الرفع على GitHub ونشره على Vercel في دقيقة:</span>
-          </h4>
-          <ol class="list-decimal list-inside space-y-1 text-slate-300 leading-relaxed">
-            <li>قم بإنشاء مستودع جديد على حسابك في GitHub (مثلاً: <code class="text-amber-300">challenge-tracker</code>).</li>
-            <li>ضع ملف هذا الكود باسم <code class="text-emerald-400 font-mono">index.html</code> في المجلد الرئيسي وارفعه (Push).</li>
-            <li>افتح موقع <a href="https://vercel.com" target="_blank" class="text-indigo-400 underline">Vercel.com</a> واضغط <strong>Add New Project</strong>، ثم اختر مستودع الـ GitHub.</li>
-            <li>اضغط <strong>Deploy</strong>، وسيعمل موقعك فورياً برابط عالمي سريع ومجاني!</li>
-          </ol>
-        </div>
-
         <!-- Reset / Backup -->
         <div class="flex items-center justify-between pt-2 border-t border-slate-800">
           <button onclick="confirmReset()" class="px-4 py-2 rounded-xl bg-red-950/40 border border-red-900/50 text-red-400 hover:bg-red-900/60 font-semibold transition">
-            إعادة تعيين التحدي والبيانات
+            إعادة تعيين التحدي والبيانات (تصفير شامل)
           </button>
           <button onclick="toggleModal('settings-modal')" class="px-5 py-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white font-semibold transition">
             إغلاق
@@ -831,7 +792,7 @@
     </div>
   </div>
 
-  <!-- MODAL: SHARE PROGRESS (With Role Pre-selected) -->
+  <!-- MODAL: SHARE PROGRESS -->
   <div id="share-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="glass-card max-w-lg w-full rounded-2xl border border-slate-800 p-5 sm:p-6 space-y-4 shadow-2xl">
       
@@ -845,11 +806,10 @@
       </div>
 
       <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
-        
-        <!-- Viewer link (Safe read-only) -->
+        <!-- Viewer link -->
         <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1.5 theme-card-subtle">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-400">1. رابط المشاهد (للمتابعة فقط دون تعديل):</span>
+            <span class="font-bold text-sky-400">1. رابط المشاهد (للمتابعة فقط دون قدرة على التعديل):</span>
             <span class="text-[10px] text-slate-500">Read-Only</span>
           </div>
           <div class="flex items-center gap-2">
@@ -860,10 +820,10 @@
           </div>
         </div>
 
-        <!-- Editor link (For Coach / Partner) -->
+        <!-- Editor link -->
         <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1.5 theme-card-subtle">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-400">2. رابط المحرر / الكوتش (يسمح بالتأشير وكتابة ملاحظات):</span>
+            <span class="font-bold text-emerald-400">2. رابط المحرر / الكوتش (يسمح بالتأشير وإضافة صور وملاحظات):</span>
             <span class="text-[10px] text-slate-500">Editor</span>
           </div>
           <div class="flex items-center gap-2">
@@ -873,7 +833,6 @@
             </button>
           </div>
         </div>
-
       </div>
 
       <div class="pt-2 flex justify-end">
@@ -885,7 +844,7 @@
     </div>
   </div>
 
-  <!-- MODAL: Custom Confirmation Modal (No alert/confirm) -->
+  <!-- MODAL: Custom Confirmation Modal -->
   <div id="confirm-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="glass-card max-w-sm w-full rounded-2xl border border-slate-800 p-5 space-y-4 shadow-2xl text-center">
       <div class="w-12 h-12 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center mx-auto text-xl">⚠️</div>
@@ -905,16 +864,16 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     /* ==========================================================
-       30-DAY MASTER CHALLENGE APPLICATION STATE & ENGINE
+       30-DAY MASTER CHALLENGE APPLICATION ENGINE
        ========================================================== */
 
     const TRACKER_PARAM_KEY = "t";
     const DAYS_OF_WEEK = ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"];
 
-    // Default configuration blueprint
+    // Default configuration blueprint: completely manual weights
     const defaultState = {
       activeDayIndex: 1,
       startDate: "2026-09-12",
@@ -923,12 +882,10 @@
         editorPin: "5678",
       },
       weightSettings: {
-        startWeight: 95.0,
-        targetWeight: 88.0,
+        startWeight: null, // manual
+        targetWeight: null, // manual
       },
-      weightLogs: [
-        { day: 1, weight: 95.0, note: "وزن بداية التحدي (السبت 12/9)" }
-      ],
+      weightLogs: [], // zero hardcoded logs
       days: []
     };
 
@@ -951,7 +908,7 @@
         const parts = startDateStr.split("-");
         baseDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
       } else {
-        baseDate = new Date(2026, 8, 12); // Sept 12, 2026
+        baseDate = new Date(2026, 8, 12); // Sept 12, 2026 (Saturday)
       }
 
       for (let i = 1; i <= 30; i++) {
@@ -983,7 +940,7 @@
           if (i % 2 !== 0) {
             salesTask = `دراسة محاضرة المبيعات رقم ${lectureNum} وتلخيص نقاطها واستيعابها`;
           } else {
-            salesTask = `تطبيق عملي لمحاضرة ${lectureNum} على نظام أتمتة الذكاء الاصطناعي لكوتشز اللياقة`;
+            salesTask = `تطبيق عملي لمحاضرة ${lectureNum} على خدمة AI Automation لمدربي اللياقة`;
           }
         } else if (i === 29) {
           salesTask = `مراجعة خطة المبيعات الشاملة وتجهيز وتصفية قائمة مدربي اللياقة المستهدفين`;
@@ -1083,7 +1040,7 @@
           sugarAllowance: sugarAllowance,
           completed: false,
           note: "",
-          photos: [], // Array of compressed photos { id, src, timestamp, tag }
+          photos: [],
           tasks: tasks
         });
       }
@@ -1095,16 +1052,16 @@
       try {
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'challenge-30day-tracker';
         
-     const firebaseConfig = {
-apiKey: "AIzaSyDE2laD3c4-e2THQYxMZ3OkugbhCj0j56U",
-authDomain: "challenge-tracker-2026.firebaseapp.com",
-projectId: "challenge-tracker-2026",
-storageBucket: "challenge-tracker-2026.firebasestorage.app",
-messagingSenderId: "638891055216",
-appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
-}
+        // Exact user Firebase credentials
+        const firebaseConfig = {
+          apiKey: "AIzaSyDE2laD3c4-e2THQYxMZ3OkugbhCj0j56U",
+          authDomain: "challenge-tracker-2026.firebaseapp.com",
+          projectId: "challenge-tracker-2026",
+          storageBucket: "challenge-tracker-2026.firebasestorage.app",
+          messagingSenderId: "638891055216",
+          appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
+        };
 
-        // Parse tracker ID from URL params (e.g. ?t=mychallenge)
         const urlParams = new URLSearchParams(window.location.search);
         const trackerFromUrl = urlParams.get(TRACKER_PARAM_KEY);
         const roleFromUrl = urlParams.get('role');
@@ -1122,27 +1079,13 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
         updateRoleUI();
         updateShareLinks();
 
-        // Update Tracker badge in UI
         const subtitleEl = document.getElementById('cloud-status-subtitle');
         if (subtitleEl) subtitleEl.innerText = `ID: ${activeTrackerId}`;
-
-        if (!firebaseConfig) {
-          updateSyncIndicator(false, "بانتظار ضبط مفتاح السحابة");
-          // Initialize blueprint locally so UI is fully usable
-          if (!appState.days || appState.days.length !== 30) {
-            appState.days = generateDaysBlueprint(appState.startDate);
-          }
-          renderActiveDayView();
-          renderDaysMatrix();
-          updateGlobalCounters();
-          return;
-        }
 
         const fbApp = initializeApp(firebaseConfig);
         auth = getAuth(fbApp);
         db = getFirestore(fbApp);
 
-        // RULE 3: Auth Before Queries
         let authUser = null;
         if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
           const cred = await signInWithCustomToken(auth, __initial_auth_token);
@@ -1157,19 +1100,15 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
           return;
         }
 
-        // Display full user ID for discoverability
         const userIdDisplay = document.getElementById('cloud-user-id-display');
         if (userIdDisplay) {
           userIdDisplay.innerText = authUser.uid;
         }
 
-        // RULE 1: Strict Public Paths
         const challengeDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'challenges', activeTrackerId);
 
-        // RULE 3: Guard Firestore read/write
         if (!auth.currentUser) return;
 
-        // Listen for Realtime Cloud updates with mandatory error callback
         cloudUnsubscribe = onSnapshot(challengeDocRef, (snap) => {
           if (snap.exists()) {
             const remoteData = snap.data();
@@ -1178,13 +1117,11 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
               renderActiveDayView();
               renderDaysMatrix();
               updateGlobalCounters();
-              renderWeightLogs();
-              renderWeightChart();
+              initWeightTracker();
               renderGlobalPhotosGallery();
               updateSyncIndicator(true, "متصل - متزامن لحظياً");
             }
           } else {
-            // First time this tracker ID is opened: initialize in Firestore
             if (!appState.days || appState.days.length !== 30) {
               appState.days = generateDaysBlueprint(appState.startDate);
             }
@@ -1223,10 +1160,8 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
     }
 
     async function saveState() {
-      // Optimistic instant UI update
       updateGlobalCounters();
 
-      // Guarded Firestore Save (Rule 3)
       if (!db || !auth || !auth.currentUser) {
         return;
       }
@@ -1576,7 +1511,6 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
       reader.onload = function(e) {
         const img = new Image();
         img.onload = async function() {
-          // Compress photo using Canvas (max dimension 800px)
           const canvas = document.createElement('canvas');
           let width = img.width;
           let height = img.height;
@@ -1595,7 +1529,6 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, width, height);
 
-          // Get compressed Base64 JPEG
           const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.70);
 
           const day = appState.days[appState.activeDayIndex - 1];
@@ -1632,7 +1565,7 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
         return;
       }
 
-      container.innerHTML = photos.map((p, idx) => `
+      container.innerHTML = photos.map((p) => `
         <div class="relative group rounded-xl overflow-hidden border border-slate-800 aspect-square bg-slate-900 cursor-pointer" onclick="openImagePreview('${p.src}', 'اليوم ${day.dayNumber} (${p.timestamp})', '${p.id}', ${day.dayNumber})">
           <img src="${p.src}" alt="صورة توثيق" class="w-full h-full object-cover group-hover:scale-105 transition">
           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
@@ -1694,10 +1627,7 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
       `).join('');
     }
 
-    let currentPreviewData = null;
-
     function openImagePreview(src, caption, photoId, dayNum) {
-      currentPreviewData = { photoId, dayNum };
       const modal = document.getElementById('image-preview-modal');
       const img = document.getElementById('preview-modal-img');
       const captionElem = document.getElementById('preview-modal-caption');
@@ -1797,12 +1727,15 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
     }
 
     function initWeightTracker() {
-      document.getElementById('start-weight-input').value = appState.weightSettings?.startWeight || 95.0;
-      document.getElementById('target-weight-input').value = appState.weightSettings?.targetWeight || 88.0;
+      const startW = appState.weightSettings?.startWeight;
+      const targetW = appState.weightSettings?.targetWeight;
+
+      document.getElementById('start-weight-input').value = (startW !== null && startW !== undefined) ? startW : "";
+      document.getElementById('target-weight-input').value = (targetW !== null && targetW !== undefined) ? targetW : "";
 
       const select = document.getElementById('log-weight-day-select');
       select.innerHTML = Array.from({ length: 30 }, (_, i) => {
-        const day = appState.days[i];
+        const day = appState.days ? appState.days[i] : null;
         const dayNum = i + 1;
         const dName = day ? day.dayName : '';
         const dDate = day ? day.dateFormatted : '';
@@ -1816,8 +1749,11 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
     async function updateWeightSettings() {
       if (!checkCanEdit()) return;
 
-      const startW = parseFloat(document.getElementById('start-weight-input').value) || 95.0;
-      const targetW = parseFloat(document.getElementById('target-weight-input').value) || 88.0;
+      const startWVal = document.getElementById('start-weight-input').value.trim();
+      const targetWVal = document.getElementById('target-weight-input').value.trim();
+
+      const startW = startWVal !== "" ? parseFloat(startWVal) : null;
+      const targetW = targetWVal !== "" ? parseFloat(targetWVal) : null;
 
       if (!appState.weightSettings) appState.weightSettings = {};
       appState.weightSettings.startWeight = startW;
@@ -1826,7 +1762,6 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
       renderWeightLogs();
       renderWeightChart();
       await saveState();
-      showToast("تم تحديث إعدادات الوزن والهدف سحابياً.", "info");
     }
 
     async function saveWeightLogEntry() {
@@ -1842,6 +1777,13 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
       }
 
       if (!appState.weightLogs) appState.weightLogs = [];
+
+      // If user logs Day 1 and start weight hasn't been set yet, set it automatically
+      if (dayNum === 1 && (appState.weightSettings?.startWeight === null || appState.weightSettings?.startWeight === undefined)) {
+        if (!appState.weightSettings) appState.weightSettings = {};
+        appState.weightSettings.startWeight = weightVal;
+        document.getElementById('start-weight-input').value = weightVal;
+      }
 
       const existingIndex = appState.weightLogs.findIndex(l => l.day === dayNum);
       if (existingIndex >= 0) {
@@ -1868,17 +1810,25 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
 
     function renderWeightLogs() {
       const logs = appState.weightLogs || [];
-      const startW = appState.weightSettings?.startWeight || 95.0;
+      const startW = appState.weightSettings?.startWeight;
       
-      let currentW = startW;
-      if (logs.length > 0) {
-        currentW = logs[logs.length - 1].weight;
+      let currentW = logs.length > 0 ? logs[logs.length - 1].weight : startW;
+
+      const currentDisplay = document.getElementById('current-weight-val');
+      const lossDisplay = document.getElementById('total-weight-loss-val');
+
+      if (currentW !== null && currentW !== undefined) {
+        currentDisplay.innerText = currentW.toFixed(1);
+      } else {
+        currentDisplay.innerText = "---";
       }
 
-      const totalLost = (startW - currentW).toFixed(1);
-
-      document.getElementById('current-weight-val').innerText = currentW.toFixed(1);
-      document.getElementById('total-weight-loss-val').innerText = (totalLost > 0 ? totalLost : "0.0");
+      if (startW !== null && startW !== undefined && currentW !== null && currentW !== undefined) {
+        const totalLost = (startW - currentW).toFixed(1);
+        lossDisplay.innerText = (parseFloat(totalLost) > 0 ? totalLost : "0.0");
+      } else {
+        lossDisplay.innerText = "0.0";
+      }
 
       const listContainer = document.getElementById('recent-weights-list');
       if (logs.length === 0) {
@@ -1906,8 +1856,8 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
       if (!ctx) return;
 
       const logs = appState.weightLogs || [];
-      const startW = appState.weightSettings?.startWeight || 95.0;
-      const targetW = appState.weightSettings?.targetWeight || 88.0;
+      const startW = appState.weightSettings?.startWeight;
+      const targetW = appState.weightSettings?.targetWeight;
 
       const labels = Array.from({ length: 30 }, (_, i) => {
         const d = appState.days ? appState.days[i] : null;
@@ -1915,7 +1865,9 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
       });
 
       const actualData = new Array(30).fill(null);
-      actualData[0] = startW;
+      if (startW !== null && startW !== undefined) {
+        actualData[0] = startW;
+      }
 
       logs.forEach(l => {
         if (l.day >= 1 && l.day <= 30) {
@@ -1923,10 +1875,13 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
         }
       });
 
-      const targetTrajectory = Array.from({ length: 30 }, (_, i) => {
-        const step = (startW - targetW) / 29;
-        return parseFloat((startW - (step * i)).toFixed(2));
-      });
+      let targetTrajectory = new Array(30).fill(null);
+      if (startW !== null && startW !== undefined && targetW !== null && targetW !== undefined) {
+        targetTrajectory = Array.from({ length: 30 }, (_, i) => {
+          const step = (startW - targetW) / 29;
+          return parseFloat((startW - (step * i)).toFixed(2));
+        });
+      }
 
       if (weightChartInstance) {
         weightChartInstance.destroy();
@@ -1978,7 +1933,7 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
             tooltip: {
               callbacks: {
                 label: function(context) {
-                  return ` ${context.dataset.label}: ${context.raw} كجم`;
+                  return ` ${context.dataset.label}: ${context.raw !== null ? context.raw + ' كجم' : 'غير مسجل'}`;
                 }
               }
             }
@@ -2130,7 +2085,6 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
 
       appState.startDate = newDate;
 
-      // Preserve existing task completions and photos while updating dates
       const newDaysBlueprint = generateDaysBlueprint(newDate);
       for (let i = 0; i < 30; i++) {
         if (appState.days && appState.days[i]) {
@@ -2170,24 +2124,6 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
 
       await saveState();
       showToast("تم حفظ رموز PIN السرية سحابياً بنجاح.", "success");
-    }
-
-    async function saveCustomFirebaseConfig() {
-      const rawJson = document.getElementById('setting-firebase-json').value.trim();
-      if (!rawJson) {
-        showToast("يرجى إدخال كود JSON صالح لإعدادات Firebase.", "warning");
-        return;
-      }
-
-      try {
-        const parsed = JSON.parse(rawJson);
-        window.__custom_firebase_config = parsed;
-        toggleModal('settings-modal');
-        showToast("تم تطبيق الإعدادات. جاري إعادة الاتصال بالسحابة...", "info");
-        await initCloudSync();
-      } catch (e) {
-        showToast("خطأ في تنسيق JSON. تأكد من نسخه بشكل صحيح من Firebase.", "warning");
-      }
     }
 
     function openShareModal() {
@@ -2273,10 +2209,10 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
         appState.days = generateDaysBlueprint(appState.startDate);
         renderActiveDayView();
         renderDaysMatrix();
-        renderWeightChart();
+        initWeightTracker();
         renderGlobalPhotosGallery();
         await saveState();
-        showToast("تمت إعادة ضبط التحدي بالكامل سحابياً.", "info");
+        showToast("تمت إعادة ضبط التحدي بالكامل وتصفير الأوزان سحابياً.", "info");
       };
     }
 
@@ -2288,7 +2224,7 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
       document.body.appendChild(downloadAnchor);
       downloadAnchor.click();
       downloadAnchor.remove();
-      showToast("تم تنزيل النسخة الاحتياطية لبيانات التحدي والصور.", "success");
+      showToast("تم تنزيل النسخة الاحتياطية لبيانات التحدي.", "success");
     }
 
     function showToast(msg, type = "info") {
@@ -2344,7 +2280,6 @@ appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
     window.openSettingsModal = openSettingsModal;
     window.applyNewStartDate = applyNewStartDate;
     window.saveSecuritySettings = saveSecuritySettings;
-    window.saveCustomFirebaseConfig = saveCustomFirebaseConfig;
     window.openLoginModal = openLoginModal;
     window.selectLoginRole = selectLoginRole;
     window.submitRoleLogin = submitRoleLogin;
