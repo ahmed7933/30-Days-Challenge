@@ -52,6 +52,8 @@
       user-select: none;
       -webkit-tap-highlight-color: transparent;
       transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+      width: 100%;
     }
     /* Scrollbar styling */
     ::-webkit-scrollbar {
@@ -77,28 +79,46 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* Light Theme Overrides */
+    /* Light Theme Overrides - High Contrast & Crisp Readability */
     html.light {
       color-scheme: light;
     }
     html.light body {
-      background-color: #f8fafc;
-      color: #0f172a;
+      background-color: #f8fafc !important;
+      color: #0f172a !important;
     }
     html.light .glass-card {
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06) !important;
+      color: #0f172a !important;
     }
     html.light .theme-text-primary {
       color: #0f172a !important;
     }
     html.light .theme-text-muted {
-      color: #64748b !important;
+      color: #475569 !important;
     }
     html.light .theme-card-subtle {
       background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    html.light .task-item-card {
+      background-color: #f8fafc !important;
       border-color: #e2e8f0 !important;
+    }
+    html.light .task-item-text {
+      color: #0f172a !important;
+    }
+    html.light input, html.light textarea, html.light select {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border-color: #cbd5e1 !important;
+    }
+    html.light nav.glass-card {
+      background: rgba(255, 255, 255, 0.95) !important;
+      border-top: 1px solid #e2e8f0 !important;
     }
 
     /* OLED Black Theme Overrides */
@@ -110,92 +130,92 @@
       border: 1px solid #27272a !important;
     }
 
+    /* Fixed timeline-dot to prevent any mobile horizontal overflow */
     .timeline-dot::before {
       content: '';
       position: absolute;
-      right: -21px;
+      right: -17px;
       top: 6px;
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: #6366f1;
       border: 2px solid currentColor;
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-indigo-600 selection:text-white pb-24 md:pb-8">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-indigo-600 selection:text-white pb-24 md:pb-8 overflow-x-hidden w-full">
 
   <!-- Top Navigation Header -->
-  <header class="sticky top-0 z-30 glass-card border-b border-slate-800/80 px-4 py-3">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+  <header class="sticky top-0 z-30 glass-card border-b border-slate-800/80 px-3 sm:px-4 py-2.5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
       
       <!-- Brand & Status -->
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-emerald-500 flex items-center justify-center shadow-lg shadow-indigo-500/20 flex-shrink-0">
-          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="flex items-center gap-2 min-w-0">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-emerald-500 flex items-center justify-center shadow-lg shadow-indigo-500/20 flex-shrink-0">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
         </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <h1 class="font-extrabold text-base md:text-lg leading-tight tracking-wide text-white theme-text-primary">
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <h1 class="font-extrabold text-sm sm:text-base leading-tight tracking-wide text-white theme-text-primary whitespace-nowrap">
               تحدي الـ 30 يوم
             </h1>
-            <span id="role-pill-badge" class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1 cursor-pointer hover:scale-105 transition" onclick="openLoginModal()">
+            <span id="role-pill-badge" class="px-1.5 py-0.5 rounded-full text-[9px] font-extrabold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1 cursor-pointer hover:scale-105 transition" onclick="openLoginModal()">
               <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
-              <span id="role-display-text">المالك (Owner)</span>
+              <span id="role-display-text">المالك</span>
             </span>
           </div>
-          <p class="text-xs text-slate-400 hidden sm:block theme-text-muted">الأوماد + صيدليات العقبي + مسار كورس وتطبيق المبيعات</p>
+          <p class="text-[10px] text-slate-400 hidden sm:block theme-text-muted truncate">الأوماد + صيدليات العقبي + مسار المبيعات</p>
         </div>
       </div>
 
-      <!-- Quick Action Buttons & Switchers -->
-      <div class="flex items-center gap-2 sm:gap-3">
+      <!-- Quick Action Buttons & Switchers (Compact on mobile) -->
+      <div class="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
 
-        <!-- Cloud Database Status Pill -->
-        <div class="hidden sm:flex items-center gap-2 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-xl text-xs theme-card-subtle">
+        <!-- Cloud Database Status Pill (Desktop only) -->
+        <div class="hidden md:flex items-center gap-2 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-xl text-xs theme-card-subtle">
           <span id="cloud-sync-status-dot" class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
           <div class="text-right leading-tight">
-            <div id="cloud-status-title" class="font-bold text-slate-300">قاعدة البيانات: جاري الاتصال...</div>
-            <div id="cloud-status-subtitle" class="text-[10px] text-slate-500 font-mono">ID: جاري التحميل</div>
+            <div id="cloud-status-title" class="font-bold text-slate-300">قاعدة البيانات: متصل 🟢</div>
+            <div id="cloud-status-subtitle" class="text-[10px] text-slate-500 font-mono">ID: master-challenge-2026</div>
           </div>
         </div>
         
         <!-- Progress Counter -->
-        <div class="text-left bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-xl flex items-center gap-2 theme-card-subtle">
+        <div class="bg-slate-900/90 border border-slate-800 px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl flex items-center gap-1.5 theme-card-subtle">
           <div class="text-right">
-            <div class="text-[10px] text-slate-400 theme-text-muted font-medium">الإنجاز الكلي</div>
-            <div id="header-progress-text" class="text-xs sm:text-sm font-bold text-emerald-400">0% (0/30)</div>
+            <div class="text-[9px] text-slate-400 theme-text-muted font-medium hidden sm:block">الإنجاز الكلي</div>
+            <div id="header-progress-text" class="text-[11px] sm:text-xs font-bold text-emerald-400">0% (0/30)</div>
           </div>
-          <div class="relative w-8 h-8 flex items-center justify-center">
-            <svg class="w-8 h-8 transform -rotate-90">
-              <circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="2.5" class="text-slate-800 opacity-40" fill="transparent"/>
-              <circle id="header-progress-ring" cx="16" cy="16" r="13" stroke="currentColor" stroke-width="2.5" class="text-emerald-500 transition-all duration-500" fill="transparent" stroke-dasharray="81.68" stroke-dashoffset="81.68" stroke-linecap="round"/>
+          <div class="relative w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center">
+            <svg class="w-6 h-6 sm:w-7 sm:h-7 transform -rotate-90">
+              <circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="2.5" class="text-slate-800 opacity-40" fill="transparent"/>
+              <circle id="header-progress-ring" cx="14" cy="14" r="11" stroke="currentColor" stroke-width="2.5" class="text-emerald-500 transition-all duration-500" fill="transparent" stroke-dasharray="69.1" stroke-dashoffset="69.1" stroke-linecap="round"/>
             </svg>
           </div>
         </div>
 
-        <!-- Role Switcher / Login Modal Button -->
-        <button onclick="openLoginModal()" title="تغيير صلاحية الدخول" class="px-2.5 py-1.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500 text-slate-300 hover:text-white transition text-xs font-semibold flex items-center gap-1.5 theme-card-subtle">
-          <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-          <span class="hidden md:inline">تبديل الحساب</span>
-        </button>
+        <!-- Mobile Cloud Sync Dot Indicator -->
+        <div class="md:hidden flex items-center justify-center p-1.5" title="حالة الاتصال بالسحابة">
+          <span id="cloud-sync-status-dot-mob" class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        </div>
 
         <!-- Theme Mode Switcher -->
-        <button onclick="cycleTheme()" id="theme-toggle-btn" title="تغيير مظهر الصفحة (ليلي / نهاري / أسود عميق)" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500 text-slate-300 hover:text-white transition theme-card-subtle">
-          <span id="theme-icon-display">🌙</span>
+        <button onclick="cycleTheme()" id="theme-toggle-btn" title="تغيير مظهر الصفحة (ليلي / نهاري / أسود)" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500 text-slate-300 hover:text-white transition theme-card-subtle">
+          <span id="theme-icon-display" class="text-xs">🌙</span>
         </button>
 
-        <!-- Share Tracker Button -->
-        <button onclick="openShareModal()" title="مشاركة الرابط مع صديق أو مدرب" class="px-3 py-1.5 rounded-xl bg-indigo-600/20 border border-indigo-500/40 hover:bg-indigo-600/30 transition text-indigo-300 hover:text-white flex items-center gap-2 text-xs font-bold">
-          <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
-          <span class="hidden lg:inline">مشاركة</span>
+        <!-- Share Button (Desktop only, available in Settings on mobile) -->
+        <button onclick="openShareModal()" title="مشاركة الرابط" class="hidden sm:flex px-2.5 py-1.5 rounded-xl bg-indigo-600/20 border border-indigo-500/40 hover:bg-indigo-600/30 transition text-indigo-300 hover:text-white items-center gap-1 text-xs font-bold">
+          <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
+          <span>مشاركة</span>
         </button>
 
         <!-- Settings Modal Button -->
-        <button onclick="openSettingsModal()" title="إعدادات التحدي والتواريخ" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500 hover:bg-slate-800 transition text-slate-300 hover:text-white theme-card-subtle">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        <button onclick="openSettingsModal()" title="إعدادات التحدي والتواريخ" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500 transition text-slate-300 hover:text-white theme-card-subtle">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
         </button>
 
       </div>
@@ -204,59 +224,53 @@
   </header>
 
   <!-- Main Container -->
-  <main class="max-w-7xl mx-auto w-full px-3 sm:px-6 py-4 sm:py-6 flex-1 flex flex-col gap-5">
+  <main class="max-w-7xl mx-auto w-full px-3 sm:px-6 py-3 sm:py-6 flex-1 flex flex-col gap-4 overflow-x-hidden">
 
-    <!-- Role Notice Banner (When in Viewer or Editor Mode) -->
-    <div id="role-alert-banner" class="hidden glass-card border rounded-2xl p-3 px-4 flex items-center justify-between text-xs">
-      <div class="flex items-center gap-2">
+    <!-- Role Notice Banner (When in Viewer Mode) -->
+    <div id="role-alert-banner" class="hidden glass-card border rounded-2xl p-2.5 px-3 flex items-center justify-between text-xs">
+      <div class="flex items-center gap-2 min-w-0">
         <span id="role-alert-icon">👀</span>
-        <span id="role-alert-text" class="font-bold">أنت تتصفح حالياً بصلاحية المشاهد (للقراءة والاطلاع فقط).</span>
+        <span id="role-alert-text" class="font-bold truncate">أنت في وضع المشاهد (للقراءة فقط).</span>
       </div>
-      <button onclick="openLoginModal()" class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-bold transition">
-        تسجيل الدخول للتعديل
+      <button onclick="openLoginModal()" class="px-2 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-bold transition flex-shrink-0">
+        تسجيل الدخول
       </button>
     </div>
 
-    <!-- Live Cloud Sync Notification Banner -->
-    <div id="cloud-banner-info" class="glass-card border border-indigo-500/30 rounded-2xl p-3.5 px-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs bg-indigo-950/20">
-      <div class="flex items-center gap-2.5">
-        <span class="p-1.5 rounded-lg bg-indigo-500/20 text-indigo-400 text-sm">📡</span>
-        <div>
-          <span class="font-bold text-indigo-200">المزامنة السحابية الحية (Realtime Cloud Sync):</span>
-          <span class="text-slate-300 block sm:inline mt-0.5 sm:mt-0">أي مهمة تعلم عليها، وزن تدخله، أو صورة ترفعها تُحفظ فوراً في السحابة وتنعكس في نفس اللحظة على هاتفك والكمبيوتر.</span>
-        </div>
+    <!-- Compact Cloud Sync Notification Pill -->
+    <div id="cloud-banner-info" class="glass-card border border-indigo-500/20 rounded-xl p-2 px-3 flex items-center justify-between text-[11px] bg-indigo-950/20">
+      <div class="flex items-center gap-2 min-w-0">
+        <span class="text-emerald-400 font-bold flex-shrink-0">🟢 سحابي:</span>
+        <span class="text-slate-300 theme-text-muted truncate">مزامنة فورية لكل نقرة وصورة مع هاتفك والكمبيوتر</span>
       </div>
-      <div class="flex items-center gap-2 self-end sm:self-auto">
-        <span class="text-[10px] text-slate-400 font-mono hidden md:inline">User ID:</span>
-        <span id="cloud-user-id-display" class="font-mono text-[10px] bg-slate-900/90 px-2 py-1 rounded-lg border border-slate-700 text-emerald-400 select-all max-w-[170px] truncate" title="معرف المستخدم السحابي الخاص بك">جاري المصادقة...</span>
-      </div>
+      <button onclick="openShareModal()" class="text-indigo-400 font-bold hover:underline flex-shrink-0 mr-2 text-[10px]">مشاركة 🔗</button>
     </div>
 
-    <!-- Navigation Tabs -->
-    <div class="flex items-center justify-between flex-wrap gap-3 pb-1 border-b border-slate-800">
-      <div class="inline-flex p-1 bg-slate-900/90 border border-slate-800/80 rounded-2xl w-full sm:w-auto overflow-x-auto theme-card-subtle">
+    <!-- Navigation Tabs (Hidden on mobile to prevent duplicate navigation and clutter) -->
+    <div class="hidden md:flex items-center justify-between flex-wrap gap-3 pb-1 border-b border-slate-800">
+      <div class="inline-flex p-1 bg-slate-900/90 border border-slate-800/80 rounded-2xl theme-card-subtle">
         
-        <button onclick="switchTab('today')" id="tab-btn-today" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
+        <button onclick="switchTab('today')" id="tab-btn-today" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
           <span>جدول اليوم</span>
         </button>
 
-        <button onclick="switchTab('matrix')" id="tab-btn-matrix" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200 theme-text-muted">
+        <button onclick="switchTab('matrix')" id="tab-btn-matrix" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200 theme-text-muted">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
           <span>مصفوفة الـ 30 يوم</span>
         </button>
 
-        <button onclick="switchTab('weight')" id="tab-btn-weight" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200 theme-text-muted">
+        <button onclick="switchTab('weight')" id="tab-btn-weight" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200 theme-text-muted">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
           <span>تتبع الوزن</span>
         </button>
 
-        <button onclick="switchTab('photos')" id="tab-btn-photos" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200 theme-text-muted">
+        <button onclick="switchTab('photos')" id="tab-btn-photos" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200 theme-text-muted">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
           <span>معرض الصور اليومي</span>
         </button>
 
-        <button onclick="switchTab('analytics')" id="tab-btn-analytics" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200 theme-text-muted">
+        <button onclick="switchTab('analytics')" id="tab-btn-analytics" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200 theme-text-muted">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
           <span>المبيعات والتحليلات</span>
         </button>
@@ -272,134 +286,105 @@
     </div>
 
     <!-- VIEW 1: TODAY'S ACTIVE DAY VIEW -->
-    <div id="view-today" class="tab-view block space-y-6">
+    <div id="view-today" class="tab-view block space-y-4">
       
       <!-- Day Selector Carousel / Banner -->
-      <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 border border-indigo-500/20">
+      <div class="glass-card rounded-2xl p-3 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-3 border border-indigo-500/20">
         
         <!-- Left: Previous / Next Navigation -->
-        <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
-          <button onclick="changeActiveDay(-1)" id="btn-prev-day" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500 hover:bg-slate-800 text-slate-300 disabled:opacity-30 disabled:hover:border-slate-800 transition theme-card-subtle">
-            <svg class="w-5 h-5 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <div class="flex items-center gap-2 w-full md:w-auto justify-between md:justify-start">
+          <button onclick="changeActiveDay(-1)" id="btn-prev-day" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500 text-slate-300 disabled:opacity-30 transition theme-card-subtle">
+            <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </button>
           
-          <div class="text-center">
-            <div class="flex items-center justify-center gap-2">
-              <span id="active-day-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">اليوم 1</span>
-              <span id="active-day-type-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">يوم راحة</span>
+          <div class="text-center min-w-0">
+            <div class="flex items-center justify-center gap-1.5 flex-wrap">
+              <span id="active-day-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">اليوم 1</span>
+              <span id="active-day-type-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">يوم راحة</span>
             </div>
-            <h2 id="active-day-title" class="text-lg sm:text-xl font-black mt-1 text-white theme-text-primary">السبت 12/9 - بداية التحدي</h2>
+            <h2 id="active-day-title" class="text-base sm:text-lg font-black mt-0.5 text-white theme-text-primary truncate">السبت 12/9 - الأسبوع 1</h2>
           </div>
 
-          <button onclick="changeActiveDay(1)" id="btn-next-day" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500 hover:bg-slate-800 text-slate-300 disabled:opacity-30 disabled:hover:border-slate-800 transition theme-card-subtle">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <button onclick="changeActiveDay(1)" id="btn-next-day" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500 text-slate-300 disabled:opacity-30 transition theme-card-subtle">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </button>
         </div>
 
         <!-- Middle: Dynamic Sugar & OMAD Pill -->
-        <div class="flex items-center flex-wrap gap-2 justify-center">
-          <div class="bg-slate-900/90 border border-slate-800 px-3 py-2 rounded-xl flex items-center gap-2.5 theme-card-subtle">
-            <div class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs">☕</div>
+        <div class="flex items-center gap-2 justify-center w-full md:w-auto">
+          <div class="flex-1 md:flex-initial bg-slate-900/90 border border-slate-800 px-2.5 py-1.5 rounded-xl flex items-center gap-2 theme-card-subtle">
+            <span class="text-xs">☕</span>
             <div class="text-right">
-              <div class="text-[10px] text-slate-400 theme-text-muted">جرعة سكر الشاي</div>
-              <div id="active-sugar-text" class="text-xs font-bold text-amber-400">1.25 ملعقة</div>
+              <div class="text-[9px] text-slate-400 theme-text-muted">سكر الشاي</div>
+              <div id="active-sugar-text" class="text-[11px] font-bold text-amber-400">1.25 ملعقة</div>
             </div>
           </div>
 
-          <div class="bg-slate-900/90 border border-slate-800 px-3 py-2 rounded-xl flex items-center gap-2.5 theme-card-subtle">
-            <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">🥗</div>
+          <div class="flex-1 md:flex-initial bg-slate-900/90 border border-slate-800 px-2.5 py-1.5 rounded-xl flex items-center gap-2 theme-card-subtle">
+            <span class="text-xs">🥗</span>
             <div class="text-right">
-              <div class="text-[10px] text-slate-400 theme-text-muted">نظام الأكل اليومي</div>
-              <div id="active-diet-type-text" class="text-xs font-bold text-emerald-400">أوماد (وجبة ≤ 1000 سعر)</div>
+              <div class="text-[9px] text-slate-400 theme-text-muted">نظام الأكل</div>
+              <div id="active-diet-type-text" class="text-[11px] font-bold text-emerald-400 truncate max-w-[130px]">أوماد (≤ 1000 سعر)</div>
             </div>
           </div>
         </div>
 
         <!-- Right: Day completion button & progress -->
-        <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+        <div class="flex items-center gap-2 w-full md:w-auto justify-between md:justify-end">
           <div class="text-right">
-            <div class="text-xs text-slate-400 theme-text-muted">إنجاز اليوم</div>
-            <div id="day-task-count" class="text-sm font-bold text-indigo-300">0 من 6 مكتملة</div>
+            <div class="text-[10px] text-slate-400 theme-text-muted">إنجاز اليوم</div>
+            <div id="day-task-count" class="text-xs font-bold text-indigo-400">0 من 6 مكتملة</div>
           </div>
-          <button onclick="markCurrentDayComplete()" id="btn-quick-complete" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold text-xs sm:text-sm transition flex items-center gap-2 shadow-lg shadow-emerald-600/30">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+          <button onclick="markCurrentDayComplete()" id="btn-quick-complete" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold text-xs transition flex items-center gap-1.5 shadow-lg shadow-emerald-600/30">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
             <span>إنهاء الكل</span>
           </button>
         </div>
 
       </div>
 
-      <!-- Main Columns Layout -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Main Columns Layout: On mobile, Tasks appear FIRST (order-1), Timeline SECOND (order-2) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
         
-        <!-- Right Column: Timeline Schedule (5 Cols) -->
-        <div class="lg:col-span-5 space-y-4">
-          <div class="glass-card rounded-2xl p-5 border border-slate-800">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
-              <h3 class="font-bold text-sm text-indigo-300 flex items-center gap-2">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                الجدول الزمني لليوم
-              </h3>
-              <span id="timeline-badge" class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">جدول راحة</span>
-            </div>
-
-            <div id="timeline-container" class="relative pr-6 border-r-2 border-slate-800 space-y-4 text-xs">
-              <!-- Dynamically populated timeline items -->
-            </div>
-
-            <!-- Helpful Dietary Order Box -->
-            <div class="mt-6 p-3 rounded-xl bg-indigo-950/40 border border-indigo-800/40 text-xs space-y-1.5">
-              <div class="font-bold text-indigo-200 flex items-center gap-1.5">
-                <span>🥗 ترتيب وجبة الأوماد (حرصاً على استقرار سكر الدم):</span>
-              </div>
-              <p class="text-slate-300 leading-relaxed">
-                1. <strong class="text-emerald-400">السلطة الخضراء أولاً</strong> لملء المعدة بالألياف الصحية.<br>
-                2. <strong class="text-sky-300">البروتين والخضار ثانياً</strong> (فراخ / كشري / عدس / فول بالبيض وطماطم).<br>
-                3. <strong class="text-amber-300">كارب قليل في النهاية</strong> (أرز قليل أو ربع رغيف عيش)، دون تخطي 1000 سعرة.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Left Column: Tasks Checklist & Daily Photos (7 Cols) -->
-        <div class="lg:col-span-7 space-y-4">
-          <div class="glass-card rounded-2xl p-5 border border-slate-800">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+        <!-- Left Column: Tasks Checklist & Daily Photos (PRIMARY ON MOBILE) -->
+        <div class="lg:col-span-7 space-y-4 order-1 lg:order-2">
+          <div class="glass-card rounded-2xl p-4 sm:p-5 border border-slate-800">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
               <div>
-                <h3 class="font-bold text-sm text-white theme-text-primary flex items-center gap-2">
+                <h3 class="font-bold text-sm text-white theme-text-primary flex items-center gap-1.5">
                   <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
                   قائمة المهام اليومية
                 </h3>
-                <p class="text-xs text-slate-400 theme-text-muted mt-0.5">اضغط على أي مهمة للتعليم عليها وحفظها سحابياً</p>
+                <p class="text-[11px] text-slate-400 theme-text-muted mt-0.5">اضغط على أي مهمة للتعليم عليها وحفظها سحابياً</p>
               </div>
-              <div id="day-progress-pill" class="px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300">
+              <div id="day-progress-pill" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-800 text-slate-300">
                 0%
               </div>
             </div>
 
             <!-- Task Items Checklist -->
-            <div id="tasks-container" class="space-y-3">
+            <div id="tasks-container" class="space-y-2.5">
               <!-- Populated via JS -->
             </div>
 
             <!-- Photo Upload & Meal Documentation Section -->
-            <div class="mt-6 pt-4 border-t border-slate-800">
+            <div class="mt-5 pt-4 border-t border-slate-800">
               <div class="flex items-center justify-between mb-2">
-                <label class="text-xs font-bold text-slate-200 theme-text-primary flex items-center gap-2">
+                <label class="text-xs font-bold text-slate-200 theme-text-primary flex items-center gap-1.5">
                   <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                  توثيق اليوم بالصور (صورة الوجبة / الميزان / التمرين)
+                  توثيق اليوم بالصور (الوجبة / الميزان / التمرين)
                 </label>
                 <span class="text-[11px] text-slate-400" id="daily-photos-count">0 صور</span>
               </div>
 
               <!-- Upload Button and File Input -->
               <div class="flex items-center gap-3">
-                <label class="cursor-pointer px-4 py-2 rounded-xl bg-slate-900 border border-slate-700 hover:border-indigo-500 text-indigo-300 hover:text-white text-xs font-semibold flex items-center gap-2 transition theme-card-subtle">
+                <label class="cursor-pointer px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 hover:border-indigo-500 text-indigo-300 hover:text-white text-xs font-semibold flex items-center gap-2 transition theme-card-subtle active:scale-95">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                   <span>إضافة صورة لليوم</span>
                   <input type="file" id="daily-photo-input" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)">
                 </label>
-                <span class="text-[11px] text-slate-500">يتم ضغط الصورة وحفظها سحابياً لحسابك فوراً</span>
+                <span class="text-[10px] text-slate-500">يتم ضغط الصورة وحفظها سحابياً لحسابك فوراً</span>
               </div>
 
               <!-- Current Day Photo Thumbnails -->
@@ -409,12 +394,12 @@
             </div>
 
             <!-- Daily Reflection Notes -->
-            <div class="mt-6 pt-4 border-t border-slate-800">
-              <label class="block text-xs font-semibold text-slate-300 mb-2 flex items-center gap-1.5 theme-text-primary">
+            <div class="mt-5 pt-4 border-t border-slate-800">
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5 theme-text-primary">
                 <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                 ملاحظات اليوم وأفكار المبيعات أو إعلانات العقبي:
               </label>
-              <textarea id="daily-note-input" rows="2" placeholder="اكتب هنا أي فكرة إعلانية، نتائج التست، أوزان التمرين أو شعورك اليومي..." class="w-full bg-slate-900/90 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition resize-none theme-card-subtle"></textarea>
+              <textarea id="daily-note-input" rows="2" placeholder="اكتب هنا أي فكرة إعلانية، نتائج التست، أوزان التمرين أو شعورك اليومي..." class="w-full bg-slate-900/90 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition resize-none theme-card-subtle"></textarea>
               <div class="flex justify-end mt-2">
                 <button onclick="saveDailyNote()" class="px-3 py-1.5 rounded-lg bg-indigo-600/30 hover:bg-indigo-600 border border-indigo-500/30 text-indigo-200 hover:text-white text-xs font-semibold transition">
                   حفظ الملاحظة
@@ -422,6 +407,35 @@
               </div>
             </div>
 
+          </div>
+        </div>
+
+        <!-- Right Column: Timeline Schedule (SECONDARY ON MOBILE) -->
+        <div class="lg:col-span-5 space-y-4 order-2 lg:order-1">
+          <div class="glass-card rounded-2xl p-4 sm:p-5 border border-slate-800">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
+              <h3 class="font-bold text-sm text-indigo-300 flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                الجدول الزمني لليوم
+              </h3>
+              <span id="timeline-badge" class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">جدول راحة</span>
+            </div>
+
+            <div id="timeline-container" class="relative pr-5 border-r-2 border-slate-800 space-y-3.5 text-xs">
+              <!-- Dynamically populated timeline items -->
+            </div>
+
+            <!-- Helpful Dietary Order Box -->
+            <div class="mt-4 p-3 rounded-xl bg-indigo-950/40 border border-indigo-800/40 text-xs space-y-1.5">
+              <div class="font-bold text-indigo-200 flex items-center gap-1.5">
+                <span>🥗 ترتيب وجبة الأوماد (حرصاً على استقرار سكر الدم):</span>
+              </div>
+              <p class="text-slate-300 theme-text-muted leading-relaxed text-[11px]">
+                1. <strong class="text-emerald-400">السلطة الخضراء أولاً</strong> لملء المعدة بالألياف الصحية.<br>
+                2. <strong class="text-sky-300">البروتين والخضار ثانياً</strong> (فراخ / كشري / عدس / فول بالبيض وطماطم).<br>
+                3. <strong class="text-amber-300">كارب قليل في النهاية</strong> (أرز قليل أو ربع رغيف عيش)، دون تخطي 1000 سعرة.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -896,24 +910,24 @@
   </div>
 
   <!-- Mobile Bottom Floating Navigation Bar (Native App Style) -->
-  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 glass-card border-t border-slate-800/90 px-2 py-2 flex items-center justify-around backdrop-blur-xl bg-slate-950/90 shadow-2xl">
-    <button onclick="switchTab('today')" id="mob-nav-today" class="flex flex-col items-center gap-1 text-[11px] font-bold text-indigo-400 py-1 px-3 transition active:scale-95">
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 glass-card border-t border-slate-800/90 px-1 py-1.5 flex items-center justify-around backdrop-blur-xl bg-slate-950/95 shadow-2xl">
+    <button onclick="switchTab('today')" id="mob-nav-today" class="flex flex-col items-center gap-0.5 text-[10px] font-bold text-indigo-400 py-1 px-2.5 transition active:scale-95">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
       <span>اليوم</span>
     </button>
-    <button onclick="switchTab('matrix')" id="mob-nav-matrix" class="flex flex-col items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-white py-1 px-3 transition active:scale-95">
+    <button onclick="switchTab('matrix')" id="mob-nav-matrix" class="flex flex-col items-center gap-0.5 text-[10px] font-medium text-slate-400 hover:text-white py-1 px-2.5 transition active:scale-95">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
       <span>30 يوم</span>
     </button>
-    <button onclick="switchTab('weight')" id="mob-nav-weight" class="flex flex-col items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-white py-1 px-3 transition active:scale-95">
+    <button onclick="switchTab('weight')" id="mob-nav-weight" class="flex flex-col items-center gap-0.5 text-[10px] font-medium text-slate-400 hover:text-white py-1 px-2.5 transition active:scale-95">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
       <span>الوزن</span>
     </button>
-    <button onclick="switchTab('photos')" id="mob-nav-photos" class="flex flex-col items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-white py-1 px-3 transition active:scale-95">
+    <button onclick="switchTab('photos')" id="mob-nav-photos" class="flex flex-col items-center gap-0.5 text-[10px] font-medium text-slate-400 hover:text-white py-1 px-2.5 transition active:scale-95">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
       <span>الصور</span>
     </button>
-    <button onclick="switchTab('analytics')" id="mob-nav-analytics" class="flex flex-col items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-white py-1 px-3 transition active:scale-95">
+    <button onclick="switchTab('analytics')" id="mob-nav-analytics" class="flex flex-col items-center gap-0.5 text-[10px] font-medium text-slate-400 hover:text-white py-1 px-2.5 transition active:scale-95">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
       <span>المبيعات</span>
     </button>
@@ -952,7 +966,7 @@
 
     let appState = JSON.parse(JSON.stringify(defaultState));
     let currentUserRole = "owner"; // 'owner' | 'editor' | 'viewer'
-    let currentTheme = "dark";     // 'dark' | 'light' | 'oled'
+    let currentTheme = localStorage.getItem('challenge_theme') || "dark";
     let activeTrackerId = "master-challenge-2026";
     let weightChartInstance = null;
     let db = null;
@@ -1127,8 +1141,16 @@
         const trackerFromUrl = urlParams.get(TRACKER_PARAM_KEY);
         const roleFromUrl = urlParams.get('role');
 
+        // Persistent role logic: if URL doesn't specify viewer, check localStorage or default to Owner!
+        const savedRole = localStorage.getItem('challenge_user_role');
         if (roleFromUrl && ['owner', 'editor', 'viewer'].includes(roleFromUrl)) {
           currentUserRole = roleFromUrl;
+          localStorage.setItem('challenge_user_role', currentUserRole);
+        } else if (savedRole && ['owner', 'editor', 'viewer'].includes(savedRole)) {
+          currentUserRole = savedRole;
+        } else {
+          currentUserRole = "owner";
+          localStorage.setItem('challenge_user_role', "owner");
         }
 
         if (trackerFromUrl) {
@@ -1159,11 +1181,6 @@
         if (!authUser) {
           updateSyncIndicator(false, "فشل المصادقة");
           return;
-        }
-
-        const userIdDisplay = document.getElementById('cloud-user-id-display');
-        if (userIdDisplay) {
-          userIdDisplay.innerText = authUser.uid;
         }
 
         const challengeDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'challenges', activeTrackerId);
@@ -1205,13 +1222,15 @@
 
     function updateSyncIndicator(isOnline, message) {
       const dot = document.getElementById('cloud-sync-status-dot');
+      const dotMob = document.getElementById('cloud-sync-status-dot-mob');
       const title = document.getElementById('cloud-status-title');
       
-      if (dot) {
-        dot.className = isOnline 
-          ? "w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-sm shadow-emerald-400/50" 
-          : "w-2.5 h-2.5 rounded-full bg-amber-400";
-      }
+      const dotClass = isOnline 
+        ? "w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-sm shadow-emerald-400/50" 
+        : "w-2.5 h-2.5 rounded-full bg-amber-400";
+
+      if (dot) dot.className = dotClass;
+      if (dotMob) dotMob.className = dotClass;
 
       if (title) {
         title.innerText = isOnline ? "قاعدة البيانات: متصل 🟢" : "قاعدة البيانات: غير متصل ⚠️";
@@ -1330,6 +1349,7 @@
       }
 
       currentUserRole = selectedLoginRoleChoice;
+      localStorage.setItem('challenge_user_role', currentUserRole);
       updateRoleUI();
       renderActiveDayView();
       toggleModal('login-modal');
@@ -1344,6 +1364,7 @@
       } else {
         currentTheme = 'dark';
       }
+      localStorage.setItem('challenge_theme', currentTheme);
       applyTheme(currentTheme);
     }
 
@@ -1477,29 +1498,39 @@
       const pill = document.getElementById('day-progress-pill');
       pill.innerText = `${percentage}%`;
       if (percentage === 100) {
-        pill.className = "px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
+        pill.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
       } else {
-        pill.className = "px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300";
+        pill.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-800 text-slate-300 theme-card-subtle";
       }
+
+      const isLight = document.documentElement.classList.contains('light');
 
       container.innerHTML = day.tasks.map((task, idx) => {
         let badgeColor = "bg-indigo-500/20 text-indigo-300 border-indigo-500/30";
         let categoryName = "عام";
-        if (task.category === "work") { badgeColor = "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"; categoryName = "العقبي"; }
-        if (task.category === "sales") { badgeColor = "bg-indigo-500/20 text-indigo-300 border-indigo-500/30"; categoryName = "المبيعات"; }
-        if (task.category === "diet") { badgeColor = "bg-teal-500/20 text-teal-300 border-teal-500/30"; categoryName = "الدايت"; }
-        if (task.category === "workout") { badgeColor = "bg-amber-500/20 text-amber-300 border-amber-500/30"; categoryName = "التمرين"; }
-        if (task.category === "tea") { badgeColor = "bg-orange-500/20 text-orange-300 border-orange-500/30"; categoryName = "السكر"; }
+        if (task.category === "work") { badgeColor = "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"; categoryName = "العقبي"; }
+        if (task.category === "sales") { badgeColor = "bg-indigo-500/20 text-indigo-400 border-indigo-500/30"; categoryName = "المبيعات"; }
+        if (task.category === "diet") { badgeColor = "bg-teal-500/20 text-teal-400 border-teal-500/30"; categoryName = "الدايت"; }
+        if (task.category === "workout") { badgeColor = "bg-amber-500/20 text-amber-400 border-amber-500/30"; categoryName = "التمرين"; }
+        if (task.category === "tea") { badgeColor = "bg-orange-500/20 text-orange-400 border-orange-500/30"; categoryName = "السكر"; }
+
+        let cardBg = task.completed 
+          ? (isLight ? 'bg-emerald-50 border-emerald-300 text-slate-700' : 'bg-emerald-950/20 border-emerald-800/50 text-slate-300')
+          : (isLight ? 'bg-slate-50 border-slate-200 text-slate-800 hover:border-indigo-400' : 'bg-slate-900/80 border-slate-800 hover:border-indigo-500/40 text-white theme-card-subtle');
+
+        let textColor = task.completed
+          ? 'line-through text-slate-400'
+          : (isLight ? 'text-slate-900 font-semibold' : 'text-slate-100 font-semibold');
 
         return `
-          <div onclick="window.toggleTask(${idx})" class="p-3 rounded-xl border transition-all cursor-pointer flex items-start gap-3 select-none ${task.completed ? 'bg-emerald-950/20 border-emerald-800/50 text-slate-300' : 'bg-slate-900/80 border-slate-800 hover:border-indigo-500/40 text-white theme-card-subtle theme-text-primary'}">
-            <div class="mt-0.5 w-5 h-5 rounded-lg flex items-center justify-center transition-all ${task.completed ? 'bg-emerald-600 text-white' : 'border-2 border-slate-600 bg-slate-800'}">
+          <div onclick="window.toggleTask(${idx})" class="p-3 rounded-xl border transition-all cursor-pointer flex items-start gap-3 select-none active:scale-[0.99] ${cardBg}">
+            <div class="mt-0.5 w-5 h-5 rounded-lg flex items-center justify-center transition-all ${task.completed ? 'bg-emerald-600 text-white' : 'border-2 border-slate-500 bg-slate-800'}">
               ${task.completed ? '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>' : ''}
             </div>
-            <div class="flex-1">
+            <div class="flex-1 min-w-0">
               <div class="flex items-center gap-2 mb-0.5">
-                <span class="text-[10px] px-2 py-0.2 rounded font-semibold border ${badgeColor}">${categoryName}</span>
-                <span class="text-xs font-semibold ${task.completed ? 'line-through text-slate-400' : 'text-slate-100 theme-text-primary'}">${task.text}</span>
+                <span class="text-[10px] px-1.5 py-0.2 rounded font-semibold border ${badgeColor}">${categoryName}</span>
+                <span class="text-xs ${textColor} break-words leading-snug">${task.text}</span>
               </div>
             </div>
           </div>
