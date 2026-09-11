@@ -1095,13 +1095,14 @@
       try {
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'challenge-30day-tracker';
         
-        // Resolve Firebase Config: priority to platform environment, then custom config if saved
-        let firebaseConfig = null;
-        if (typeof __firebase_config !== 'undefined' && __firebase_config) {
-          firebaseConfig = JSON.parse(__firebase_config);
-        } else if (window.__custom_firebase_config) {
-          firebaseConfig = window.__custom_firebase_config;
-        }
+     const firebaseConfig = {
+apiKey: "AIzaSyDE2laD3c4-e2THQYxMZ3OkugbhCj0j56U",
+authDomain: "challenge-tracker-2026.firebaseapp.com",
+projectId: "challenge-tracker-2026",
+storageBucket: "challenge-tracker-2026.firebasestorage.app",
+messagingSenderId: "638891055216",
+appId: "1:638891055216:web:bedaf8a84a3c2ada303cb5"
+}
 
         // Parse tracker ID from URL params (e.g. ?t=mychallenge)
         const urlParams = new URLSearchParams(window.location.search);
