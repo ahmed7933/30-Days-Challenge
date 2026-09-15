@@ -5,13 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>تحدي الـ 30 يوم | Vercel Cloud Tracker</title>
   
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Chart.js for Weight & Analytics charts -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- Canvas Confetti for celebrations -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <!-- Google Fonts: Cairo -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -55,7 +51,6 @@
       overflow-x: hidden;
       width: 100%;
     }
-    /* Scrollbar styling */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -71,7 +66,6 @@
       background: rgba(99, 102, 241, 0.7);
     }
 
-    /* Glass and theme containers */
     .glass-card {
       background: rgba(15, 23, 42, 0.75);
       backdrop-filter: blur(12px);
@@ -79,7 +73,6 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* Light Theme Overrides - High Contrast & Crisp Readability */
     html.light {
       color-scheme: light;
     }
@@ -114,7 +107,6 @@
       border-top: 1px solid #e2e8f0 !important;
     }
 
-    /* OLED Black Theme Overrides */
     html.oled body {
       background-color: #000000 !important;
     }
@@ -123,7 +115,6 @@
       border: 1px solid #27272a !important;
     }
 
-    /* Fixed timeline-dot to prevent any mobile horizontal overflow */
     .timeline-dot::before {
       content: '';
       position: absolute;
@@ -139,11 +130,9 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-indigo-600 selection:text-white pb-24 md:pb-8 overflow-x-hidden w-full">
 
-  <!-- Top Navigation Header -->
   <header class="sticky top-0 z-30 glass-card border-b border-slate-800/80 px-3 sm:px-4 py-2.5">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
       
-      <!-- Brand & Status -->
       <div class="flex items-center gap-2 min-w-0">
         <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-emerald-500 flex items-center justify-center shadow-lg shadow-indigo-500/20 flex-shrink-0">
           <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -164,19 +153,16 @@
         </div>
       </div>
 
-      <!-- Quick Action Buttons & Switchers -->
       <div class="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
 
-        <!-- Cloud Database Status Pill (Desktop only) -->
         <div class="hidden md:flex items-center gap-2 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-xl text-xs theme-card-subtle">
           <span id="cloud-sync-status-dot" class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
           <div class="text-right leading-tight">
-            <div id="cloud-status-title" class="font-bold text-slate-300">قاعدة البيانات: متصل 🟢</div>
+            <div id="cloud-status-title" class="font-bold text-slate-300">قاعدة البيانات: جاري الاتصال...</div>
             <div id="cloud-status-subtitle" class="text-[10px] text-slate-500 font-mono">ID: master-challenge-2026</div>
           </div>
         </div>
         
-        <!-- Progress Counter -->
         <div class="bg-slate-900/90 border border-slate-800 px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl flex items-center gap-1.5 theme-card-subtle">
           <div class="text-right">
             <div class="text-[9px] text-slate-400 theme-text-muted font-medium hidden sm:block">الإنجاز الكلي</div>
@@ -190,23 +176,19 @@
           </div>
         </div>
 
-        <!-- Mobile Cloud Sync Dot Indicator -->
         <div class="md:hidden flex items-center justify-center p-1.5" title="حالة الاتصال بالسحابة">
           <span id="cloud-sync-status-dot-mob" class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
         </div>
 
-        <!-- Theme Mode Switcher -->
-        <button onclick="cycleTheme()" id="theme-toggle-btn" title="تغيير مظهر الصفحة (ليلي / نهاري / أسود)" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500 text-slate-300 hover:text-white transition theme-card-subtle">
+        <button onclick="cycleTheme()" id="theme-toggle-btn" title="تغيير مظهر الصفحة" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500 text-slate-300 hover:text-white transition theme-card-subtle">
           <span id="theme-icon-display" class="text-xs">🌙</span>
         </button>
 
-        <!-- Share Button (Desktop only) -->
         <button onclick="openShareModal()" title="مشاركة الرابط" class="hidden sm:flex px-2.5 py-1.5 rounded-xl bg-indigo-600/20 border border-indigo-500/40 hover:bg-indigo-600/30 transition text-indigo-300 hover:text-white items-center gap-1 text-xs font-bold">
           <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
           <span>مشاركة</span>
         </button>
 
-        <!-- Settings Modal Button -->
         <button onclick="openSettingsModal()" title="إعدادات التحدي والتواريخ" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500 transition text-slate-300 hover:text-white theme-card-subtle">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
         </button>
@@ -216,10 +198,8 @@
     </div>
   </header>
 
-  <!-- Main Container -->
   <main class="max-w-7xl mx-auto w-full px-3 sm:px-6 py-3 sm:py-6 flex-1 flex flex-col gap-4 overflow-x-hidden">
 
-    <!-- Navigation Tabs (Desktop only) -->
     <div class="hidden md:flex items-center justify-between flex-wrap gap-3 pb-1 border-b border-slate-800">
       <div class="inline-flex p-1 bg-slate-900/90 border border-slate-800/80 rounded-2xl theme-card-subtle">
         
@@ -249,7 +229,6 @@
         </button>
       </div>
 
-      <!-- Export Backup Button -->
       <div class="flex items-center gap-2 text-xs">
         <button onclick="exportBackupData()" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-slate-200 transition flex items-center gap-1.5 theme-card-subtle">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
@@ -258,13 +237,10 @@
       </div>
     </div>
 
-    <!-- VIEW 1: TODAY'S ACTIVE DAY VIEW -->
     <div id="view-today" class="tab-view block space-y-4">
       
-      <!-- Day Selector Carousel / Banner -->
       <div class="glass-card rounded-2xl p-3 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-3 border border-indigo-500/20">
         
-        <!-- Left: Previous / Next Navigation -->
         <div class="flex items-center gap-2 w-full md:w-auto justify-between md:justify-start">
           <button onclick="changeActiveDay(-1)" id="btn-prev-day" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500 text-slate-300 disabled:opacity-30 transition theme-card-subtle">
             <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
@@ -283,7 +259,6 @@
           </button>
         </div>
 
-        <!-- Middle: Dynamic Sugar & OMAD Pill -->
         <div class="flex items-center gap-2 justify-center w-full md:w-auto">
           <div class="flex-1 md:flex-initial bg-slate-900/90 border border-slate-800 px-2.5 py-1.5 rounded-xl flex items-center gap-2 theme-card-subtle">
             <span class="text-xs">☕</span>
@@ -302,7 +277,6 @@
           </div>
         </div>
 
-        <!-- Right: Day completion button & progress -->
         <div class="flex items-center gap-2 w-full md:w-auto justify-between md:justify-end">
           <div class="text-right">
             <div class="text-[10px] text-slate-400 theme-text-muted">إنجاز اليوم</div>
@@ -316,10 +290,8 @@
 
       </div>
 
-      <!-- Main Columns Layout: On mobile, Tasks appear FIRST (order-1), Timeline SECOND (order-2) -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
         
-        <!-- Left Column: Tasks Checklist & Daily Photos (PRIMARY ON MOBILE) -->
         <div class="lg:col-span-7 space-y-4 order-1 lg:order-2">
           <div class="glass-card rounded-2xl p-4 sm:p-5 border border-slate-800">
             <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
@@ -335,12 +307,8 @@
               </div>
             </div>
 
-            <!-- Task Items Checklist -->
-            <div id="tasks-container" class="space-y-2.5">
-              <!-- Populated via JS -->
-            </div>
+            <div id="tasks-container" class="space-y-2.5"></div>
 
-            <!-- Photo Upload & Meal Documentation Section -->
             <div class="mt-5 pt-4 border-t border-slate-800">
               <div class="flex items-center justify-between mb-2">
                 <label class="text-xs font-bold text-slate-200 theme-text-primary flex items-center gap-1.5">
@@ -350,7 +318,6 @@
                 <span class="text-[11px] text-slate-400" id="daily-photos-count">0 صور</span>
               </div>
 
-              <!-- Upload Button and File Input -->
               <div class="flex items-center gap-3">
                 <label class="cursor-pointer px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 hover:border-indigo-500 text-indigo-300 hover:text-white text-xs font-semibold flex items-center gap-2 transition theme-card-subtle active:scale-95">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
@@ -360,13 +327,9 @@
                 <span class="text-[10px] text-slate-500">حفظ سحابي فوري وإمكانية الحذف بنقرة واحدة</span>
               </div>
 
-              <!-- Current Day Photo Thumbnails With Direct Delete Action -->
-              <div id="daily-photos-gallery" class="grid grid-cols-3 sm:grid-cols-4 gap-2.5 mt-3">
-                <!-- Injected via JS -->
-              </div>
+              <div id="daily-photos-gallery" class="grid grid-cols-3 sm:grid-cols-4 gap-2.5 mt-3"></div>
             </div>
 
-            <!-- Daily Reflection Notes -->
             <div class="mt-5 pt-4 border-t border-slate-800">
               <label class="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center gap-1.5 theme-text-primary">
                 <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
@@ -383,7 +346,6 @@
           </div>
         </div>
 
-        <!-- Right Column: Timeline Schedule (VERTICAL FLOW: Time -> Title -> Description) -->
         <div class="lg:col-span-5 space-y-4 order-2 lg:order-1">
           <div class="glass-card rounded-2xl p-4 sm:p-5 border border-slate-800">
             <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
@@ -394,11 +356,8 @@
               <span id="timeline-badge" class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">جدول راحة</span>
             </div>
 
-            <div id="timeline-container" class="relative pr-5 border-r-2 border-slate-800 space-y-3.5 text-xs">
-              <!-- Dynamically populated timeline items -->
-            </div>
+            <div id="timeline-container" class="relative pr-5 border-r-2 border-slate-800 space-y-3.5 text-xs"></div>
 
-            <!-- Helpful Dietary Order Box -->
             <div class="mt-4 p-3 rounded-xl bg-indigo-950/40 border border-indigo-800/40 text-xs space-y-1.5">
               <div class="font-bold text-indigo-200 flex items-center gap-1.5">
                 <span>🥗 ترتيب وجبة الأوماد (حرصاً على استقرار سكر الدم):</span>
@@ -415,7 +374,6 @@
       </div>
     </div>
 
-    <!-- VIEW 2: 30-DAY MATRIX CALENDAR VIEW -->
     <div id="view-matrix" class="tab-view hidden space-y-6">
       <div class="glass-card rounded-2xl p-5 border border-slate-800">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800">
@@ -433,16 +391,11 @@
           </div>
         </div>
 
-        <div id="days-matrix-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 mt-6">
-          <!-- Injected via JavaScript -->
-        </div>
+        <div id="days-matrix-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 mt-6"></div>
       </div>
     </div>
 
-    <!-- VIEW 3: WEIGHT TRACKER & CHART -->
     <div id="view-weight" class="tab-view hidden space-y-6">
-      
-      <!-- Top Metrics Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
         <div class="glass-card rounded-2xl p-4 border border-slate-800">
@@ -479,7 +432,6 @@
 
       </div>
 
-      <!-- Log Weight Entry + Interactive Chart -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         <div class="lg:col-span-4 glass-card rounded-2xl p-5 border border-slate-800 space-y-4">
@@ -492,9 +444,7 @@
           <div class="space-y-3">
             <div>
               <label class="block text-xs text-slate-300 mb-1 theme-text-primary">حدد اليوم:</label>
-              <select id="log-weight-day-select" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 theme-card-subtle theme-text-primary">
-                <!-- Days populated -->
-              </select>
+              <select id="log-weight-day-select" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 theme-card-subtle theme-text-primary"></select>
             </div>
 
             <div>
@@ -514,13 +464,10 @@
 
           <div class="pt-3 border-t border-slate-800">
             <div class="text-xs font-semibold text-slate-300 mb-2 theme-text-primary">سجل القياسات:</div>
-            <div id="recent-weights-list" class="max-h-48 overflow-y-auto space-y-1.5 text-xs">
-              <!-- Logs injected -->
-            </div>
+            <div id="recent-weights-list" class="max-h-48 overflow-y-auto space-y-1.5 text-xs"></div>
           </div>
         </div>
 
-        <!-- Chart Section -->
         <div class="lg:col-span-8 glass-card rounded-2xl p-5 border border-slate-800 flex flex-col justify-between">
           <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-2">
             <div>
@@ -536,10 +483,8 @@
         </div>
 
       </div>
-
     </div>
 
-    <!-- VIEW 4: ALL PHOTOS GALLERY (WITH INSTANT DELETE) -->
     <div id="view-photos" class="tab-view hidden space-y-6">
       <div class="glass-card rounded-2xl p-5 border border-slate-800">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800">
@@ -551,26 +496,20 @@
             <p class="text-xs text-slate-400 theme-text-muted mt-1">تصفح صور الوجبات والميزان والتمرين مع إمكانية الحذف المباشر بنقرة واحدة</p>
           </div>
 
-          <!-- Filter by day -->
           <div class="flex items-center gap-2">
             <label class="text-xs text-slate-400">تصفية:</label>
             <select id="gallery-filter-day" onchange="renderGlobalPhotosGallery()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white theme-card-subtle theme-text-primary">
               <option value="all">جميع الأيام (30 يوم)</option>
-              <!-- Days populated -->
             </select>
           </div>
         </div>
 
-        <div id="global-photos-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 mt-6">
-          <!-- Injected via JS -->
-        </div>
+        <div id="global-photos-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 mt-6"></div>
       </div>
     </div>
 
-    <!-- VIEW 5: COMPREHENSIVE 6-PILLAR TRACKER & SMART INSIGHTS HUB -->
     <div id="view-analytics" class="tab-view hidden space-y-6">
       
-      <!-- Top Overall Score & Pulse Banner -->
       <div class="glass-card rounded-2xl p-5 border border-indigo-500/30 flex flex-col md:flex-row items-center justify-between gap-4 bg-gradient-to-r from-indigo-950/40 via-slate-900/60 to-emerald-950/30">
         <div class="flex items-center gap-3 w-full md:w-auto">
           <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-2xl font-black shadow-inner flex-shrink-0">
@@ -596,7 +535,6 @@
         </div>
       </div>
 
-      <!-- Smart Insights & Diagnostic Feedback Card -->
       <div class="glass-card rounded-2xl p-4 sm:p-5 border border-slate-800 space-y-3">
         <div class="flex items-center justify-between">
           <h3 class="font-bold text-sm text-amber-300 flex items-center gap-2">
@@ -604,17 +542,11 @@
           </h3>
           <span class="text-[10px] text-slate-400 font-mono">تحديث لحظي</span>
         </div>
-        <div id="insights-diagnostic-container" class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs leading-relaxed">
-          <!-- Dynamic actionable diagnostic text injected via JS -->
-        </div>
+        <div id="insights-diagnostic-container" class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs leading-relaxed"></div>
       </div>
 
-      <!-- 6 Pillars Comprehensive Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="six-pillars-grid">
-        <!-- Injected dynamically via JS: English, OMAD, Workout, Elokaby, Sales, Sugar -->
-      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="six-pillars-grid"></div>
 
-      <!-- Sales & AI Automation Curriculum Reference Section -->
       <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-4">
         <div class="flex items-center justify-between pb-2 border-b border-slate-800">
           <div>
@@ -628,16 +560,13 @@
           <span id="curriculum-status-pill" class="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">0/14 مكتملة</span>
         </div>
 
-        <div id="sales-curriculum-list" class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-          <!-- Injected via JS -->
-        </div>
+        <div id="sales-curriculum-list" class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs"></div>
       </div>
 
     </div>
 
   </main>
 
-  <!-- MODAL: SETTINGS & CHALLENGE CONFIGURATION -->
   <div id="settings-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="glass-card max-w-2xl w-full rounded-2xl border border-slate-800 p-5 sm:p-6 max-h-[90vh] overflow-y-auto space-y-5 shadow-2xl">
       
@@ -651,10 +580,8 @@
         </button>
       </div>
 
-      <!-- Settings Sections -->
       <div class="space-y-4 text-xs">
         
-        <!-- Challenge Dates Configuration -->
         <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3 theme-card-subtle">
           <h4 class="font-bold text-indigo-300 text-sm flex items-center gap-2">
             <span>📅 تخصيص تاريخ بدء التحدي</span>
@@ -676,7 +603,6 @@
           </div>
         </div>
 
-        <!-- Role Passcodes & Security -->
         <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3 theme-card-subtle">
           <h4 class="font-bold text-emerald-400 text-sm flex items-center gap-2">
             <span>🔐 كلمات مرور الصلاحيات (Security Passcodes)</span>
@@ -703,7 +629,6 @@
           </div>
         </div>
 
-        <!-- Reset / Backup -->
         <div class="flex items-center justify-between pt-2 border-t border-slate-800">
           <button onclick="confirmReset()" class="px-4 py-2 rounded-xl bg-red-950/40 border border-red-900/50 text-red-400 hover:bg-red-900/60 font-semibold transition">
             إعادة تعيين التحدي والبيانات (تصفير شامل)
@@ -717,7 +642,6 @@
     </div>
   </div>
 
-  <!-- MODAL: LOGIN / SWITCH ROLE (Owner, Editor, Viewer) -->
   <div id="login-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="glass-card max-w-md w-full rounded-2xl border border-slate-800 p-5 sm:p-6 space-y-4 shadow-2xl">
       
@@ -768,7 +692,6 @@
     </div>
   </div>
 
-  <!-- MODAL: IMAGE PREVIEW LIGHTBOX (WITH DELETE BUTTON) -->
   <div id="image-preview-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="closeImagePreview()">
     <div class="relative max-w-3xl w-full max-h-[90vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
       <button onclick="closeImagePreview()" class="absolute -top-10 left-0 p-2 rounded-full bg-slate-800 text-white hover:bg-slate-700">
@@ -789,7 +712,6 @@
     </div>
   </div>
 
-  <!-- MODAL: SHARE PROGRESS -->
   <div id="share-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="glass-card max-w-lg w-full rounded-2xl border border-slate-800 p-5 sm:p-6 space-y-4 shadow-2xl">
       
@@ -803,7 +725,6 @@
       </div>
 
       <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
-        <!-- Viewer link -->
         <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1.5 theme-card-subtle">
           <div class="flex items-center justify-between">
             <span class="font-bold text-sky-400">1. رابط المشاهد (للمتابعة فقط دون قدرة على التعديل):</span>
@@ -817,7 +738,6 @@
           </div>
         </div>
 
-        <!-- Editor link -->
         <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1.5 theme-card-subtle">
           <div class="flex items-center justify-between">
             <span class="font-bold text-emerald-400">2. رابط المحرر / الكوتش (يسمح بالتأشير وإضافة صور وملاحظات):</span>
@@ -841,7 +761,6 @@
     </div>
   </div>
 
-  <!-- MODAL: EDIT WEIGHT ENTRY -->
   <div id="edit-weight-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="glass-card max-w-sm w-full rounded-2xl border border-slate-800 p-5 space-y-4 shadow-2xl">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
@@ -878,7 +797,6 @@
     </div>
   </div>
 
-  <!-- MODAL: Custom Confirmation Modal -->
   <div id="confirm-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="glass-card max-w-sm w-full rounded-2xl border border-slate-800 p-5 space-y-4 shadow-2xl text-center">
       <div class="w-12 h-12 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center mx-auto text-xl">⚠️</div>
@@ -892,7 +810,6 @@
     </div>
   </div>
 
-  <!-- Mobile Bottom Floating Navigation Bar (Native App Style) -->
   <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 glass-card border-t border-slate-800/90 px-1 py-1.5 flex items-center justify-around backdrop-blur-xl bg-slate-950/95 shadow-2xl">
     <button onclick="switchTab('today')" id="mob-nav-today" class="flex flex-col items-center gap-0.5 text-[10px] font-bold text-indigo-400 py-1 px-2.5 transition active:scale-95">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
@@ -916,7 +833,6 @@
     </button>
   </nav>
 
-  <!-- Toast Container -->
   <div id="toast-container" class="fixed bottom-20 md:bottom-4 left-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
   <script type="module">
@@ -924,38 +840,8 @@
     import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    /* ==========================================================
-       30-DAY MASTER CHALLENGE ENGINE & COMPREHENSIVE TRACKER
-       ========================================================== */
-
     const TRACKER_PARAM_KEY = "t";
     const DAYS_OF_WEEK = ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"];
-
-    const defaultState = {
-      activeDayIndex: 1,
-      startDate: "2026-09-12",
-      security: {
-        ownerPin: "1234",
-        editorPin: "5678",
-      },
-      weightSettings: {
-        startWeight: null, // Fully manual
-        targetWeight: null, // Fully manual
-      },
-      weightLogs: [],
-      days: []
-    };
-
-    let appState = JSON.parse(JSON.stringify(defaultState));
-    let currentUserRole = "owner";
-    let currentTheme = localStorage.getItem('challenge_theme') || "dark";
-    let activeTrackerId = "master-challenge-2026";
-    let weightChartInstance = null;
-    let db = null;
-    let auth = null;
-    let cloudUnsubscribe = null;
-    let selectedLoginRoleChoice = "owner";
-    let isSavingToCloud = false;
 
     function generateDaysBlueprint(startDateStr) {
       const days = [];
@@ -1108,6 +994,76 @@
       return days;
     }
 
+    const defaultState = {
+      activeDayIndex: 1,
+      startDate: "2026-09-12",
+      security: {
+        ownerPin: "1234",
+        editorPin: "5678",
+      },
+      weightSettings: {
+        startWeight: null,
+        targetWeight: null,
+      },
+      weightLogs: [],
+      days: []
+    };
+
+    let appState = JSON.parse(JSON.stringify(defaultState));
+    appState.days = generateDaysBlueprint(appState.startDate);
+
+    let currentUserRole = "owner";
+    let currentTheme = localStorage.getItem('challenge_theme') || "dark";
+    let activeTrackerId = "master-challenge-2026";
+    let weightChartInstance = null;
+    let db = null;
+    let auth = null;
+    let cloudUnsubscribe = null;
+    let selectedLoginRoleChoice = "owner";
+    let isSavingToCloud = false;
+
+    function healAndReconcileState(incomingData) {
+      if (!incomingData) incomingData = {};
+      
+      const startDate = incomingData.startDate || appState.startDate || "2026-09-12";
+      const blueprint = generateDaysBlueprint(startDate);
+
+      if (incomingData.days && Array.isArray(incomingData.days) && incomingData.days.length > 0) {
+        blueprint.forEach((bDay, idx) => {
+          const existingDay = incomingData.days.find(d => d.dayNumber === bDay.dayNumber) || incomingData.days[idx];
+          if (existingDay) {
+            bDay.completed = existingDay.completed || false;
+            bDay.note = existingDay.note || "";
+            bDay.photos = Array.isArray(existingDay.photos) ? existingDay.photos : [];
+            
+            if (Array.isArray(existingDay.tasks)) {
+              bDay.tasks.forEach(bTask => {
+                const existingTask = existingDay.tasks.find(t => t.id === bTask.id || (t.category === bTask.category && t.text === bTask.text));
+                if (existingTask) {
+                  bTask.completed = existingTask.completed || false;
+                }
+              });
+            }
+          }
+        });
+      }
+
+      return {
+        activeDayIndex: incomingData.activeDayIndex || appState.activeDayIndex || 1,
+        startDate: startDate,
+        security: {
+          ownerPin: incomingData.security?.ownerPin || "1234",
+          editorPin: incomingData.security?.editorPin || "5678",
+        },
+        weightSettings: {
+          startWeight: incomingData.weightSettings?.startWeight ?? null,
+          targetWeight: incomingData.weightSettings?.targetWeight ?? null,
+        },
+        weightLogs: Array.isArray(incomingData.weightLogs) ? incomingData.weightLogs : [],
+        days: blueprint
+      };
+    }
+
     async function initCloudSync() {
       try {
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'challenge-30day-tracker';
@@ -1167,46 +1123,45 @@
         cloudUnsubscribe = onSnapshot(challengeDocRef, (snap) => {
           if (snap.exists()) {
             const remoteData = snap.data();
-            if (remoteData && remoteData.days && remoteData.days.length === 30) {
-              remoteData.days.forEach((d) => {
-                if (d.tasks && !d.tasks.some(t => t.category === "english")) {
-                  const salesIdx = d.tasks.findIndex(t => t.category === "sales");
-                  const englishTask = {
-                    id: `t_${d.dayNumber}_english`,
-                    text: "ممارسة اللغة الإنجليزية لمدة 30 دقيقة عبر Gemini Live Chat للتواصل مع العملاء",
-                    category: "english",
-                    completed: false
-                  };
-                  if (salesIdx !== -1) {
-                    d.tasks.splice(salesIdx + 1, 0, englishTask);
-                  } else {
-                    d.tasks.push(englishTask);
-                  }
-                }
-              });
+            appState = healAndReconcileState(remoteData);
+            
+            if (!remoteData.days || !Array.isArray(remoteData.days) || remoteData.days.length !== 30) {
+              setDoc(challengeDocRef, appState, { merge: true }).catch(err => console.warn("Self-heal write error:", err));
+            }
 
-              appState = remoteData;
-              renderActiveDayView();
-              renderDaysMatrix();
-              updateGlobalCounters();
-              initWeightTracker();
-              renderGlobalPhotosGallery();
-              renderAnalyticsView();
-              updateSyncIndicator(true, "متصل - متزامن لحظياً");
-            }
+            renderActiveDayView();
+            renderDaysMatrix();
+            updateGlobalCounters();
+            initWeightTracker();
+            renderGlobalPhotosGallery();
+            renderAnalyticsView();
+            updateSyncIndicator(true, "متصل - متزامن لحظياً");
           } else {
-            if (!appState.days || appState.days.length !== 30) {
-              appState.days = generateDaysBlueprint(appState.startDate);
-            }
+            appState = healAndReconcileState(appState);
             setDoc(challengeDocRef, appState).then(() => {
               updateSyncIndicator(true, "تم إنشاء التحدي سحابياً");
             }).catch(err => {
               console.warn("Init doc error:", err);
             });
+            renderActiveDayView();
+            renderDaysMatrix();
+            updateGlobalCounters();
+            initWeightTracker();
+            renderGlobalPhotosGallery();
+            renderAnalyticsView();
           }
         }, (err) => {
           console.warn("Firestore snapshot error:", err);
           updateSyncIndicator(false, "انقطع الاتصال بالسحابة");
+          if (!appState.days || appState.days.length !== 30) {
+            appState.days = generateDaysBlueprint(appState.startDate);
+          }
+          renderActiveDayView();
+          renderDaysMatrix();
+          updateGlobalCounters();
+          initWeightTracker();
+          renderGlobalPhotosGallery();
+          renderAnalyticsView();
         });
 
       } catch (err) {
@@ -1378,8 +1333,10 @@
     }
 
     function renderActiveDayView() {
-      if (!appState.days || appState.days.length === 0) return;
-      const day = appState.days[appState.activeDayIndex - 1];
+      if (!appState.days || appState.days.length !== 30) {
+        appState.days = generateDaysBlueprint(appState.startDate);
+      }
+      const day = appState.days[appState.activeDayIndex - 1] || appState.days[0];
       if (!day) return;
 
       document.getElementById('active-day-badge').innerText = `اليوم ${day.dayNumber} (${day.dateFormatted || ''})`;
@@ -1463,7 +1420,6 @@
         ];
       }
 
-      // Vertical stack layout: Time -> Title -> Description
       container.innerHTML = timelineItems.map(item => `
         <div class="relative timeline-dot pb-3 space-y-0.5">
           <div class="font-black ${item.color}">${item.time}</div>
@@ -1651,7 +1607,6 @@
         <div class="relative group rounded-xl overflow-hidden border border-slate-800 aspect-square bg-slate-900 cursor-pointer">
           <img src="${p.src}" alt="صورة توثيق" class="w-full h-full object-cover group-hover:scale-105 transition" onclick="openImagePreview('${p.src}', 'اليوم ${day.dayNumber} (${p.timestamp})', '${p.id}', ${day.dayNumber})">
           
-          <!-- Delete Icon Button directly on card -->
           <button onclick="event.stopPropagation(); window.deletePhoto('${p.id}', ${day.dayNumber})" title="حذف الصورة" class="absolute top-1.5 left-1.5 w-6 h-6 rounded-lg bg-red-600/80 hover:bg-red-600 text-white flex items-center justify-center transition shadow shadow-black/50 active:scale-95 z-10">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
           </button>
@@ -1708,7 +1663,6 @@
               يوم ${p.dayNumber}
             </span>
 
-            <!-- Direct Delete Button on Thumbnail -->
             <button onclick="event.stopPropagation(); window.deletePhoto('${p.id}', ${p.dayNumber})" title="حذف الصورة" class="absolute top-1.5 left-1.5 w-6 h-6 rounded-lg bg-red-600/80 hover:bg-red-600 text-white flex items-center justify-center transition shadow shadow-black/50 active:scale-95 z-10">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
             </button>
@@ -1779,7 +1733,10 @@
 
     function renderDaysMatrix() {
       const grid = document.getElementById('days-matrix-grid');
-      if (!grid || !appState.days) return;
+      if (!grid) return;
+      if (!appState.days || appState.days.length !== 30) {
+        appState.days = generateDaysBlueprint(appState.startDate);
+      }
 
       grid.innerHTML = appState.days.map(day => {
         const total = day.tasks.length;
@@ -2135,7 +2092,6 @@
     }
 
     function renderAnalyticsView() {
-      // Metric Accumulators
       let englishTotal = 0, englishDone = 0;
       let dietTotal = 0, dietDone = 0;
       let workoutTotal = 0, workoutDone = 0;
@@ -2174,7 +2130,6 @@
         });
       }
 
-      // Percentage calculators
       const englishPct = englishTotal > 0 ? Math.round((englishDone / englishTotal) * 100) : 0;
       const dietPct = dietTotal > 0 ? Math.round((dietDone / dietTotal) * 100) : 0;
       const workoutPct = workoutTotal > 0 ? Math.round((workoutDone / workoutTotal) * 100) : 0;
@@ -2182,7 +2137,6 @@
       const salesPct = salesTotal > 0 ? Math.round((salesDone / salesTotal) * 100) : 0;
       const sugarPct = sugarTotal > 0 ? Math.round((sugarDone / sugarTotal) * 100) : 0;
 
-      // Overall Score
       const allPillars = [englishPct, dietPct, workoutPct, elokabyPct, salesPct, sugarPct];
       const overallAvg = Math.round(allPillars.reduce((a, b) => a + b, 0) / 6);
 
@@ -2205,7 +2159,6 @@
         }
       }
 
-      // 6 Pillars Array Data Definition
       const pillars = [
         {
           key: "english",
@@ -2275,7 +2228,6 @@
         }
       ];
 
-      // Render 6 Pillars Cards
       const grid = document.getElementById('six-pillars-grid');
       if (grid) {
         grid.innerHTML = pillars.map(p => {
@@ -2324,7 +2276,6 @@
         }).join('');
       }
 
-      // Generate Dynamic Diagnostic Insights
       const diagnosticContainer = document.getElementById('insights-diagnostic-container');
       if (diagnosticContainer) {
         const sortedPillars = [...pillars].sort((a, b) => b.pct - a.pct);
@@ -2360,7 +2311,6 @@
         `;
       }
 
-      // Sales Curriculum Roadmap
       const curriculumContainer = document.getElementById('sales-curriculum-list');
       const curriculumPill = document.getElementById('curriculum-status-pill');
       const salesCurriculumData = [
@@ -2686,11 +2636,17 @@
 
     window.onload = async function() {
       applyTheme(currentTheme);
-      await initCloudSync();
+      if (!appState.days || appState.days.length !== 30) {
+        appState.days = generateDaysBlueprint(appState.startDate);
+      }
       renderActiveDayView();
       renderDaysMatrix();
       updateGlobalCounters();
+      initWeightTracker();
+      renderGlobalPhotosGallery();
       renderAnalyticsView();
+
+      await initCloudSync();
     };
   </script>
 </body>
